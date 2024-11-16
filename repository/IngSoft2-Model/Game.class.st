@@ -66,6 +66,16 @@ Game >> addPermanentCardPlayed: aCard [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> applyDefendWith: anIdOfSpaceship [ 
+	| affectedSpaceship |
+	self targetSpaceshipExistValidation: anIdOfSpaceship.
+	affectedSpaceship := spaceships detect: [ :aSpaceship |
+		                     aSpaceship id = anIdOfSpaceship ].
+	affectedSpaceship updateShield: 1.
+	lastCardPlayed := Defend.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
@@ -105,7 +115,7 @@ Game >> applySpeedWith: anIdOfSpaceship [
 	affectedSpaceship := spaceships detect: [ :aSpaceship |
 		                     aSpaceship id = anIdOfSpaceship ].
 	affectedSpaceship addSpeed.
-	lastCardPlayed := Speed
+	lastCardPlayed := Speed.
 ]
 
 { #category : #'as yet unclassified' }

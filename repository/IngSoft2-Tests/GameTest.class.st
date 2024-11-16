@@ -2299,3 +2299,109 @@ GameTest >> test051WhenASpaceshipChooseATargetSpaceshipThatDoesNotExistThenThrow
 		raise: Error
 		withMessage: 'The target spaceship does not exist'
 ]
+
+{ #category : #tests }
+GameTest >> test052WhenADefendCardIsPlayedThenTheAffectedSpaceshipIncreasesItsShieldsByOne [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection with: 1 with: 2).
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Defend) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 3.
+	cardArguments at: 'idTargetSpaceship' put: 2.
+
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 3).
+
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+		
+	aGame playCard: cardArguments.
+
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 3)
+]
+
+{ #category : #tests }
+GameTest >> test053WhenADefendCardIsPlayedAndShieldsAreMaxThenTheAffectedSpaceshipIncreasesItsShieldsByOne [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection with: 1 with: 2).
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Defend) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	cardArguments at: 'idTargetSpaceship' put: 1.
+
+
+	self assert: aGame checkShieldsOfSpaceships equals: (OrderedCollection with: 3 with: 3).
+
+	aGame playCard: cardArguments.
+
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 1 with: 2).
+	
+	self assert: aGame checkShieldsOfSpaceships equals: (OrderedCollection with: 4 with: 3).
+	 
+
+]
