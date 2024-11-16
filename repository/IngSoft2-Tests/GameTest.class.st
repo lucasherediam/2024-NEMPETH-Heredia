@@ -2405,3 +2405,181 @@ GameTest >> test053WhenADefendCardIsPlayedAndShieldsAreMaxThenTheAffectedSpacesh
 	 
 
 ]
+
+{ #category : #tests }
+GameTest >> test054WhenADoubleCardIsPlayedThenTheAffectedSpaceshipDoublesTheValueOfTheThrowInBattle [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection
+			 with: 1
+			 with: 2
+			 with: 1
+			 with: 2
+			 with: 3).
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Double) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	cardArguments at: 'idTargetSpaceship' put: 1.
+
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 3).
+
+	aGame playCard: cardArguments.
+
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 1 with: 2).
+
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 1)
+]
+
+{ #category : #tests }
+GameTest >> test055WhenADoubleCardIsPlayedToAMercenaryThenTheAffectedSpaceshipDoublesTheValueOfTheThrowInBattle [
+
+	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments anotherCardArguments |
+	aDie := LoadedDie of: 10.
+	aSequence := OrderedCollection withAll: #(1 2 3 1 2 3 7).
+	aDie add: aSequence.
+	dices := OrderedCollection with: aDie.
+
+	cards := {
+		         (1 -> Double).
+		         (2 -> Mercenary) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 3
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 2.
+	cardArguments at: 'idTargetSpaceship' put: 3.
+	aGame playCard: cardArguments.
+	
+	anotherCardArguments := Dictionary new.
+	anotherCardArguments at: 'idSpaceship' put: 3.
+	anotherCardArguments at: 'idCardToUse' put: 5.
+	anotherCardArguments at: 'idTargetSpaceship' put: 3.
+	aGame playCard: anotherCardArguments.
+	
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2 with: 3).
+
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 1 with: 2 with: 1).
+
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 1 with: 4)
+]
+
+{ #category : #tests }
+GameTest >> test056WhenASpaceshipLandsOnABoxWhereIsASpaceshipAffectedByADoubleThenTheSpaceshipThatHasDoubleDoublesTheValueOfTheThrowInBattle [
+
+	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments anotherCardArguments |
+	aDie := LoadedDie of: 10.
+	aSequence := OrderedCollection withAll: #(3 3 4 3).
+	aDie add: aSequence.
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Double).
+		      } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	cardArguments at: 'idTargetSpaceship' put: 1.
+	aGame playCard: cardArguments.
+	
+	aGame playTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 1 with: 2).
+
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 4 with: 1).
+]

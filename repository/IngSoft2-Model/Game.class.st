@@ -76,6 +76,16 @@ Game >> applyDefendWith: anIdOfSpaceship [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> applyDoubleWith: anIdOfSpaceship [ 
+	| affectedSpaceship |
+	self targetSpaceshipExistValidation: anIdOfSpaceship.
+	affectedSpaceship := spaceships detect: [ :aSpaceship |
+		                     aSpaceship id = anIdOfSpaceship ].
+	affectedSpaceship updateBattleMultiplier: 2.
+	lastCardPlayed := Double.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
@@ -166,6 +176,13 @@ Game >> createSpaceships: numberOfSpaceships [
 		anSpaceship obtain: (deck giveACard).
 	aCollectionOfSpaceships add: anSpaceship ].
 	^ aCollectionOfSpaceships
+]
+
+{ #category : #'as yet unclassified' }
+Game >> getBattleMultiplierFor: aSpaceship [ 
+    ^ (OrderedCollection with: aSpaceship battleMultiplier)
+        , ((aSpaceship mercenaries) collect: [:aMercenarySpaceship | aMercenarySpaceship battleMultiplier]).
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -325,10 +342,10 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 				'A spaceship is trying to play a card that does not have' ]
 ]
 
-{ #category : #accessing }
+{ #category : #'as yet unclassified' }
 Game >> verifyBattleWith: actualSpaceship [
 
-	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship |
+	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship multiplierForActualSpaceship multiplierForCounterSpaceship |
 	actualSpaceship position = 1 ifTrue: [ ^ self ].
 	
 	sumOfThrowsActualSpaceship := 0.
@@ -345,9 +362,12 @@ Game >> verifyBattleWith: actualSpaceship [
 
 
 	counterSpaceship := spaceshipsToFight first.
-
-	1 to: (1 + actualSpaceship mercenaries size) do: [ :i | sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship + self throwDices  ].
-	1 to: (1 + counterSpaceship mercenaries size) do: [ :i | sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship + self throwDices  ].
+	
+	multiplierForActualSpaceship :=  self getBattleMultiplierFor: actualSpaceship.
+	multiplierForCounterSpaceship := self getBattleMultiplierFor: counterSpaceship.
+	
+	1 to: (1 + actualSpaceship mercenaries size) do: [ :i | sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship + (self throwDices * (multiplierForActualSpaceship at: i)) ].
+	1 to: (1 + counterSpaceship mercenaries size) do: [ :i | sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship + (self throwDices * (multiplierForCounterSpaceship at: i))  ].
 
 	 sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [

@@ -10,7 +10,8 @@ Class {
 		'cards',
 		'movementBySpeed',
 		'avaliableForMercenary',
-		'mercenaries'
+		'mercenaries',
+		'battleMultiplier'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -47,6 +48,11 @@ Spaceship >> addSpeed [
 	movementBySpeed := movementBySpeed + 1.
 ]
 
+{ #category : #accessing }
+Spaceship >> battleMultiplier [
+	^ battleMultiplier
+]
+
 { #category : #'as yet unclassified' }
 Spaceship >> cards [
 	^ cards
@@ -77,6 +83,7 @@ Spaceship >> initializeWith: anId [
 	position := 1.
 	shield := 3.
 	lapsCompleted := 0.
+	battleMultiplier := 1.
 	cards := OrderedCollection new.
 	state := AvailableState create
 ]
@@ -161,6 +168,11 @@ Spaceship >> state [
 Spaceship >> subtractLap [
 
 	lapsCompleted := lapsCompleted - 1
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> updateBattleMultiplier: aValue [ 
+	battleMultiplier := aValue.
 ]
 
 { #category : #'as yet unclassified' }
