@@ -11,7 +11,16 @@ Class {
 
 { #category : #'instance creation' }
 FiniteDeck class >> createWith: cards [
-	^ self new initializeWith: cards.
+
+	self emptyDeckValidation: cards.
+	^ self new initializeWith: cards
+]
+
+{ #category : #'instance creation' }
+FiniteDeck class >> emptyDeckValidation: cards [
+
+	cards isEmpty ifTrue: [
+		Error signal: 'The deck should be created with at least one card' ]
 ]
 
 { #category : #adding }

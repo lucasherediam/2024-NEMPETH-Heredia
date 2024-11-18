@@ -4,6 +4,11 @@ Class {
 	#category : #'IngSoft2-Tests'
 }
 
+{ #category : #asserting }
+FiniteDeckTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
+	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
+]
+
 { #category : #tests }
 FiniteDeckTest >> test001WhenTheFiniteDeckIsAskedForACardThenGivesACard [
 
@@ -215,4 +220,15 @@ FiniteDeckTest >> test005WhenTheFiniteDeckDoesNotHaveMoreCardsAndTheDiscardDeckN
 	self
 		assert: aGame checkAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2).
+]
+
+{ #category : #tests }
+FiniteDeckTest >> test006WhenAFiniteDeckIsCreatedWithNoCardsThenThrowError [
+
+	| cards |
+	cards := OrderedCollection new.
+	self
+		should: [ FiniteDeck createWith: cards ]
+		raise: Error
+		withMessage: 'The deck should be created with at least one card'
 ]
