@@ -30,8 +30,6 @@ FiniteDeckTest >> test002WhenAnSpaceshipPlaysACardThenTheCardGoesToDiscardDeck [
 	aDie := Die of: 10.
 	dices := OrderedCollection with: aDie.
 
-	"aCardsGenerator := CardsGenerator createWith: 10."
-	"cards := aCardsGenerator cards."
 	cards := OrderedCollection new.
 	cards add: (Speed createWithId: 1).
 	cards add: (Speed createWithId: 2).

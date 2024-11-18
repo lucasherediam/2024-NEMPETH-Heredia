@@ -844,8 +844,13 @@ GameTest >> test025WhenAnAccelerationCardIsPlayedThenAllThrowsIncreaseByOne [
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Acceleration) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Acceleration createWithId: 1).
+	cards add: (Acceleration createWithId: 2).
+	cards add: (Acceleration createWithId: 3).
+	cards add: (Acceleration createWithId: 4).
+	cards add: (Acceleration createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -896,11 +901,14 @@ GameTest >> test026WhenAnSpeedCardIsPlayedThenTheAffectedSpaceshipThrowsIncrease
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Acceleration).
-		         (2 -> Speed) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+		
+	cards := OrderedCollection new.
+	cards add: (Acceleration createWithId: 1).
+	cards add: (Speed createWithId: 2).
+	cards add: (Acceleration createWithId: 3).
+	cards add: (Speed createWithId: 4).
+	cards add: (Acceleration createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -953,11 +961,14 @@ GameTest >> test027WhenAnCancelationCardIsPlayedAndTheAffectedCardIsSpeedThenThe
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Speed).
-		         (2 -> Cancellation) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+		
+	cards := OrderedCollection new.
+	cards add: (Speed createWithId: 1).
+	cards add: (Cancellation createWithId: 2).
+	cards add: (Speed createWithId: 3).
+	cards add: (Cancellation createWithId: 4).
+	cards add: (Speed createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1035,11 +1046,14 @@ GameTest >> test028WhenAnCancelationCardIsPlayedAndTheAffectedCardIsAcceleration
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1 with: 3).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Acceleration).
-		         (2 -> Cancellation) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Acceleration createWithId: 1).
+	cards add: (Cancellation createWithId: 2).
+	cards add: (Acceleration createWithId: 3).
+	cards add: (Cancellation createWithId: 4).
+	cards add: (Acceleration createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1118,9 +1132,17 @@ GameTest >> test029WhenAnMercenaryCardIsPlayedThenAlliedSpaceshipsNotFight [
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1).
 	dices := OrderedCollection with: aDie.
+	
+	cards := OrderedCollection new.
+	cards add: (Mercenary createWithId: 1).
+	cards add: (Mercenary createWithId: 2).
+	cards add: (Mercenary createWithId: 3).
+	cards add: (Mercenary createWithId: 4).
+	cards add: (Mercenary createWithId: 5).
+	cards add: (Mercenary createWithId: 6).
+	cards add: (Mercenary createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
 
-	cards := { (1 -> Mercenary) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1175,8 +1197,15 @@ GameTest >> test030WhenAMercenaryCardIsPlayedSpaceshipAndHisAlliedLoseThenLoseOn
 			 with: 1).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Mercenary) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Mercenary createWithId: 1).
+	cards add: (Mercenary createWithId: 2).
+	cards add: (Mercenary createWithId: 3).
+	cards add: (Mercenary createWithId: 4).
+	cards add: (Mercenary createWithId: 5).
+	cards add: (Mercenary createWithId: 6).
+	cards add: (Mercenary createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1236,10 +1265,15 @@ GameTest >> test031WhenAnCancelationCardIsPlayedAndTheAffectedCardIsMercenaryThe
 			 with: 1).
 	dices := OrderedCollection with: aDie.
 
-	cards := {
-		         (1 -> Mercenary).
-		         (2 -> Cancellation) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Mercenary createWithId: 1).
+	cards add: (Cancellation createWithId: 2).
+	cards add: (Mercenary createWithId: 3).
+	cards add: (Cancellation createWithId: 4).
+	cards add: (Mercenary createWithId: 5).
+	cards add: (Cancellation createWithId: 6).
+	cards add: (Mercenary createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1315,8 +1349,13 @@ GameTest >> test032WhenARepeatCardIsPlayAndLastBoxIsNormalBoxThenNoEffectApplied
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1360,8 +1399,13 @@ GameTest >> test033WhenARepeatCardIsPlayAndLastBoxIsBlackholeThenTheAffectedSpac
 	aDie add: (OrderedCollection with: 3 with: 5).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1407,8 +1451,13 @@ GameTest >> test034WhenARepeatCardIsPlayAndLastBoxIsHyperSpaceJumpThenTheAffecte
 	aDie add: (OrderedCollection with: 2 with: 1).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1458,8 +1507,13 @@ GameTest >> test035WhenARepeatCardIsPlayAndLastBoxIsMoonWalkThenTheAffectedSpace
 	aDie add: (OrderedCollection with: 4 with: 3).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1505,8 +1559,13 @@ GameTest >> test036WhenARepeatCardIsPlayAndLastBoxIsAtomicbombThenAllSpaceshipLo
 	aDie add: (OrderedCollection with: 4 with: 3).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1561,8 +1620,13 @@ GameTest >> test037WhenARepeatCardIsPlayAndLastBoxIsHyperJumpThenTheAffectedSpac
 	aDie add: (OrderedCollection with: 3 with: 1).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Repeat createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Repeat createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Repeat createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1611,11 +1675,14 @@ GameTest >> test038WhenARedoCardIsPlayAndLastCardIsSpeedCardThenTheAffectedSpace
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Speed).
-		         (2 -> Redo) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Speed createWithId: 1).
+	cards add: (Redo createWithId: 2).
+	cards add: (Speed createWithId: 3).
+	cards add: (Redo createWithId: 4).
+	cards add: (Speed createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1667,10 +1734,13 @@ GameTest >> test039WhenARedoCardIsPlayAndLastCardIsAccelerationCardThenAllSpaces
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := {
-		         (1 -> Acceleration).
-		         (2 -> Redo) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Acceleration createWithId: 1).
+	cards add: (Redo createWithId: 2).
+	cards add: (Acceleration createWithId: 3).
+	cards add: (Redo createWithId: 4).
+	cards add: (Acceleration createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1722,13 +1792,14 @@ GameTest >> test040WhenARedoCardIsPlayAndLastCardIsCancellationCardThenRemoveThe
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1 with: 3).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Redo).
-		         (2 -> Speed).
-		         (3 -> Cancellation).
-		         (4 -> Speed) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Redo createWithId: 1).
+	cards add: (Speed createWithId: 2).
+	cards add: (Cancellation createWithId: 3).
+	cards add: (Speed createWithId: 4).
+	cards add: (Redo createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1801,10 +1872,13 @@ GameTest >> test041WhenARedoCardIsPlayAndLastCardIsRepeatCardThenSpaceshipTarget
 	aDie add: (OrderedCollection with: 3 with: 5).
 	dices := OrderedCollection with: aDie.
 
-	cards := {
-		         (1 -> Redo).
-		         (2 -> Repeat) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Redo createWithId: 1).
+	cards add: (Repeat createWithId: 2).
+	cards add: (Redo createWithId: 3).
+	cards add: (Repeat createWithId: 4).
+	cards add: (Redo createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -1862,11 +1936,16 @@ GameTest >> test042WhenARedoCardIsPlayAndLastCardIsMercenaryCardThenSpaceshipGet
 	aDie := LoadedDie of: 10.
 	aDie add: (OrderedCollection with: 1 with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
-
-	cards := {
-		         (1 -> Redo).
-		         (2 -> Mercenary) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Redo createWithId: 1).
+	cards add: (Mercenary createWithId: 2).
+	cards add: (Redo createWithId: 3).
+	cards add: (Mercenary createWithId: 4).
+	cards add: (Redo createWithId: 5).
+	cards add: (Mercenary createWithId: 6).
+	cards add: (Redo createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2181,8 +2260,16 @@ GameTest >> test049WhenASpaceshipTriesToPlayMercenaryAndChooseOneAlreadyChosenAs
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Mercenary) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Mercenary createWithId: 1).
+	cards add: (Mercenary createWithId: 2).
+	cards add: (Mercenary createWithId: 3).
+	cards add: (Mercenary createWithId: 4).
+	cards add: (Mercenary createWithId: 5).
+	cards add: (Mercenary createWithId: 6).
+	cards add: (Mercenary createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
+
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2308,8 +2395,13 @@ GameTest >> test052WhenADefendCardIsPlayedThenTheAffectedSpaceshipIncreasesItsSh
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Defend) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Defend createWithId: 1).
+	cards add: (Defend createWithId: 2).
+	cards add: (Defend createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	cards add: (Defend createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2366,8 +2458,13 @@ GameTest >> test053WhenADefendCardIsPlayedAndShieldsAreMaxThenTheAffectedSpacesh
 	aDie add: (OrderedCollection with: 1 with: 2).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Defend) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Defend createWithId: 1).
+	cards add: (Defend createWithId: 2).
+	cards add: (Defend createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	cards add: (Defend createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2419,8 +2516,13 @@ GameTest >> test054WhenADoubleCardIsPlayedThenTheAffectedSpaceshipDoublesTheValu
 			 with: 3).
 	dices := OrderedCollection with: aDie.
 
-	cards := { (1 -> Double) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Double createWithId: 1).
+	cards add: (Double createWithId: 2).
+	cards add: (Double createWithId: 3).
+	cards add: (Double createWithId: 4).
+	cards add: (Double createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2478,10 +2580,15 @@ GameTest >> test055WhenADoubleCardIsPlayedToAMercenaryThenTheAffectedSpaceshipDo
 	aDie add: aSequence.
 	dices := OrderedCollection with: aDie.
 
-	cards := {
-		         (1 -> Double).
-		         (2 -> Mercenary) } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	cards := OrderedCollection new.
+	cards add: (Double createWithId: 1).
+	cards add: (Mercenary createWithId: 2).
+	cards add: (Double createWithId: 3).
+	cards add: (Mercenary createWithId: 4).
+	cards add: (Double createWithId: 5).
+	cards add: (Mercenary createWithId: 6).
+	cards add: (Double createWithId: 7).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
@@ -2539,10 +2646,14 @@ GameTest >> test056WhenASpaceshipLandsOnABoxWhereIsASpaceshipAffectedByADoubleTh
 	aSequence := OrderedCollection withAll: #(3 3 4 3).
 	aDie add: aSequence.
 	dices := OrderedCollection with: aDie.
-
-	cards := { (1 -> Double).
-		      } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Double createWithId: 1).
+	cards add: (Double createWithId: 2).
+	cards add: (Double createWithId: 3).
+	cards add: (Double createWithId: 4).
+	cards add: (Double createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
 
 	aNormalBoxOne := NormalBox new.
 	aNormalBoxTwo := NormalBox new.
