@@ -248,7 +248,9 @@ Game >> playCard: aCardArguments [
 	card := actualSpaceship cards detect: [ :aCard | aCard id = idOfCard ].
 
 	card applyCardEffect: aCardArguments and: self.
-	actualSpaceship removeThis: card
+	actualSpaceship removeThis: card.
+	
+	deck addToDiscardDeck: card.
 ]
 
 { #category : #'as yet unclassified' }

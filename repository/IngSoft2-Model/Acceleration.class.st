@@ -8,6 +8,7 @@ Class {
 Acceleration >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceship idOfSpaceshipAtTurn |
+	
 	idOfSpaceship := aCardArguments at: 'idSpaceship'.
 	idOfSpaceshipAtTurn := aGame getIdOfSpaceshipAtTurn.
 	self

@@ -6,7 +6,9 @@ Class {
 
 { #category : #initialization }
 Defend >> applyCardEffect: aCardArguments and: aGame [ 
+	
 	| idOfAffectedSpaceship |
+	
 	idOfAffectedSpaceship := aCardArguments at: 'idTargetSpaceship'.
 	
 	aGame applyDefendWith: idOfAffectedSpaceship.

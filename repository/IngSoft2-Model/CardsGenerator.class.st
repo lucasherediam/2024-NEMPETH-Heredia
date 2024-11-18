@@ -52,5 +52,4 @@ CardsGenerator >> initializeWith: aNumberOfCards [
 			cards add: (Double createWithId: i) ].
 		randomValue > 0.875 ifTrue: [ cards add: (Defend createWithId: i) ] ].
 
-	cards shuffle.
 ]

@@ -11,7 +11,8 @@ Class {
 { #category : #'as yet unclassified' }
 Mercenary >> applyCardEffect: aCardArguments and: aGame [
 
-	| idOfSpaceshipAtTurn |
+	| idOfSpaceshipAtTurn | 
+	
 	idOfActualSpaceship := aCardArguments at: 'idSpaceship'.
 	idOfMercenarySpaceship := aCardArguments at: 'idTargetSpaceship'.
 

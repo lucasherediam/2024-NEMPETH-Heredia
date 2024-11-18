@@ -2534,7 +2534,7 @@ GameTest >> test055WhenADoubleCardIsPlayedToAMercenaryThenTheAffectedSpaceshipDo
 { #category : #tests }
 GameTest >> test056WhenASpaceshipLandsOnABoxWhereIsASpaceshipAffectedByADoubleThenTheSpaceshipThatHasDoubleDoublesTheValueOfTheThrowInBattle [
 
-	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments anotherCardArguments |
+	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
 	aDie := LoadedDie of: 10.
 	aSequence := OrderedCollection withAll: #(3 3 4 3).
 	aDie add: aSequence.

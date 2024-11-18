@@ -8,6 +8,7 @@ Class {
 Double >> applyCardEffect: aCardArguments and: aGame [ 
 	 
 	| idOfAffectedSpaceship |
+	
 	idOfAffectedSpaceship := aCardArguments at: 'idTargetSpaceship'.
 	
 	aGame applyDoubleWith: idOfAffectedSpaceship.
