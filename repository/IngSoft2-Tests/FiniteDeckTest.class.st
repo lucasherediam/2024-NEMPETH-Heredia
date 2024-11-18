@@ -100,7 +100,7 @@ FiniteDeckTest >> test003WhenTheFiniteDeckIsEmptyThenReturnsFalseWhenIsAskedForA
 	
 	self assert: (cardOne isKindOf: Speed).
 	self assert: cardOne id equals: 1.
-	self deny: cardTwo.
+	self assert: cardTwo equals: nil.
 	
 ]
 

@@ -12,7 +12,7 @@ WithoutCardsState class >> create [
 { #category : #'as yet unclassified' }
 WithoutCardsState >> giveACard: aFiniteDeck [ 
 	(aFiniteDeck discardDeck) isEmpty
-	ifTrue: [ ^ false ] 
+	ifTrue: [ ^ nil ] 
 	ifFalse: [ 
 		aFiniteDeck changeDecks.
 		aFiniteDeck changeTo: WithCardsState create.

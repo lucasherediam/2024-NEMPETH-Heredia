@@ -17,10 +17,8 @@ CardBox >> applyEffect: spaceships and: actualSpaceship [
 
 	| aCard |
 	aCard := deck giveACard.
-	
-	aCard	ifFalse:  [ ^ aCard  ].
-		
-	actualSpaceship obtain: aCard
+
+	aCard ifNotNil: [ actualSpaceship obtain: aCard ]
 ]
 
 { #category : #initialization }

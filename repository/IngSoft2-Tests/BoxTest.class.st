@@ -228,12 +228,12 @@ BoxTest >> test009WhenCardBoxApplyEffectThenSpaceshipAddACardOnItsPrivateDeck [
     anotherSpaceship := Spaceship createWithId: 2.
     spaceships := OrderedCollection with: aSpaceship with: anotherSpaceship.
     actualSpaceship := spaceships removeFirst.
-
-	cards := {
-        1 -> Acceleration.
-        2 -> Speed.
-    } asDictionary.
-	aDeck := LoadedDeck createWith: cards.
+	
+	cards := OrderedCollection new.
+	cards add: (Acceleration createWithId: 1).
+	cards add: (Speed createWithId: 2).
+	cards add: (Acceleration createWithId: 3).
+	aDeck := FiniteDeck createWith: cards.
     
     aCardBox := CardBox createWith: aDeck.
     aCardBox applyEffect: spaceships and: actualSpaceship. 
