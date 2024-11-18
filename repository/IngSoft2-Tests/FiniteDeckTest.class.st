@@ -83,3 +83,136 @@ FiniteDeckTest >> test002WhenAnSpaceshipPlaysACardThenTheCardGoesToDiscardDeck [
 			
 	self assert:  (aDeck discardDeck) size equals: 2
 ]
+
+{ #category : #tests }
+FiniteDeckTest >> test003WhenTheFiniteDeckIsEmptyThenReturnsFalseWhenIsAskedForACard [
+
+	| aCardsGenerator cards aDeck cardOne cardTwo |
+	aCardsGenerator := CardsGenerator createWith: 10.
+	
+	cards := OrderedCollection new.
+	cards add: (Speed createWithId: 1).
+	
+ 	aDeck := FiniteDeck createWith: cards.
+	
+	cardOne := aDeck giveACard.
+	cardTwo := aDeck giveACard.
+	
+	self assert: (cardOne isKindOf: Speed).
+	self assert: cardOne id equals: 1.
+	self deny: cardTwo.
+	
+]
+
+{ #category : #tests }
+FiniteDeckTest >> test004WhenTheFiniteDeckDoesNotHaveMoreCardsThenShufflesTheDiscardDeckAndUsesThatDeck [
+
+	| aDie dices cards aDeck aCardBoxOne aCardBoxTwo aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection
+			 with: 1
+			 with: 2
+			 with: 1
+			 with: 2
+			 with: 3).
+	dices := OrderedCollection with: aDie.
+
+	cards := OrderedCollection new.
+	cards add: (Double createWithId: 1).
+	cards add: (Cancellation  createWithId: 2).
+	cards add: (Speed createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	
+	aDeck := FiniteDeck createWith: cards.
+
+	aCardBoxOne := CardBox createWith: aDeck.
+	aCardBoxTwo := CardBox createWith: aDeck.
+	aPath := OrderedCollection with: aCardBoxOne with: aCardBoxTwo.
+	aBoard := Board createWith: aPath.
+	
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+		
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 2).
+		
+	self assert: (aDeck cards) isEmpty. 
+	
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	cardArguments at: 'idTargetSpaceship' put: 2.
+
+	aGame playCard: cardArguments.
+	
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 4.
+	cardArguments at: 'idTargetSpaceship' put: 2.
+	
+	aGame playCard: cardArguments.
+	
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 1 with: 1).	
+			
+	self assert:  (aDeck discardDeck) size equals: 2.
+	
+	aGame playTurn.
+	
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+]
+
+{ #category : #tests }
+FiniteDeckTest >> test005WhenTheFiniteDeckDoesNotHaveMoreCardsAndTheDiscardDeckNeitherThenTheCardBoxDoesNotGiveACard [
+	| aDie dices cards aDeck aCardBoxOne aCardBoxTwo aPath aBoard aGame |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection
+			 with: 1
+			 with: 2
+			 with: 1
+			 with: 2
+			 with: 3).
+	dices := OrderedCollection with: aDie.
+
+	cards := OrderedCollection new.
+	cards add: (Double createWithId: 1).
+	cards add: (Cancellation  createWithId: 2).
+	cards add: (Speed createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	
+	aDeck := FiniteDeck createWith: cards.
+
+	aCardBoxOne := CardBox createWith: aDeck.
+	aCardBoxTwo := CardBox createWith: aDeck.
+	aPath := OrderedCollection with: aCardBoxOne with: aCardBoxTwo.
+	aBoard := Board createWith: aPath.
+	
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+		
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 2).
+		
+	self assert: (aDeck cards) isEmpty. 
+		
+	self assert:  (aDeck discardDeck) isEmpty.
+	
+	aGame playTurn.
+	
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 2).
+]

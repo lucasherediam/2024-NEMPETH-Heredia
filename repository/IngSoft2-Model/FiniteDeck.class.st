@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'cards',
-		'discardDeck'
+		'discardDeck',
+		'state'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -24,13 +25,25 @@ FiniteDeck >> cards [
 ]
 
 { #category : #'as yet unclassified' }
+FiniteDeck >> changeDecks [
+	cards := discardDeck shuffle.
+	discardDeck := OrderedCollection new.
+]
+
+{ #category : #'as yet unclassified' }
+FiniteDeck >> changeTo: anState [ 
+	state := anState.
+]
+
+{ #category : #'as yet unclassified' }
 FiniteDeck >> discardDeck [
 	^ discardDeck.
 ]
 
 { #category : #'as yet unclassified' }
 FiniteDeck >> giveACard [
-	^ cards removeFirst.
+	
+	^ state giveACard: self.
 	
 ]
 
@@ -38,4 +51,5 @@ FiniteDeck >> giveACard [
 FiniteDeck >> initializeWith: aCollectionOfCards [ 
 	cards := aCollectionOfCards.
 	discardDeck := OrderedCollection new.
+	state := WithCardsState create.
 ]
