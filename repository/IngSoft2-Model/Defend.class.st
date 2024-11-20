@@ -7,9 +7,9 @@ Class {
 { #category : #initialization }
 Defend >> applyCardEffect: aCardArguments and: aGame [ 
 	
-	| idOfAffectedSpaceship |
+	| idOfTargetSpaceship |
 	
-	idOfAffectedSpaceship := aCardArguments at: 'idTargetSpaceship'.
+	idOfTargetSpaceship := aCardArguments at: 'idTargetSpaceship'.
 	
-	aGame applyDefendWith: idOfAffectedSpaceship.
+	aGame applyDefendTo: idOfTargetSpaceship.
 ]

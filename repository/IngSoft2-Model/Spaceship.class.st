@@ -2,16 +2,12 @@ Class {
 	#name : #Spaceship,
 	#superclass : #Object,
 	#instVars : [
-		'position',
-		'shield',
 		'lapsCompleted',
 		'state',
 		'id',
 		'cards',
-		'movementBySpeed',
-		'avaliableForMercenary',
-		'mercenaries',
-		'battleMultiplier'
+		'physicalAttributes',
+		'battleAttributes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -39,18 +35,19 @@ Spaceship >> addLap [
 
 { #category : #adding }
 Spaceship >> addMercenary: aSpaceship [
-	mercenaries add: aSpaceship.
+	battleAttributes addMercenary: aSpaceship.
 	aSpaceship changeAvailabilityForMercenary.
 ]
 
 { #category : #adding }
 Spaceship >> addSpeed [
-	movementBySpeed := movementBySpeed + 1.
+	physicalAttributes addSpeed.
 ]
 
 { #category : #accessing }
 Spaceship >> battleMultiplier [
-	^ battleMultiplier
+
+	^ battleAttributes battleMultiplier
 ]
 
 { #category : #'as yet unclassified' }
@@ -60,7 +57,7 @@ Spaceship >> cards [
 
 { #category : #'as yet unclassified' }
 Spaceship >> changeAvailabilityForMercenary [
-	avaliableForMercenary := avaliableForMercenary not. 
+	battleAttributes changeAvailabilityForMercenary.
 ]
 
 { #category : #'as yet unclassified' }
@@ -77,20 +74,16 @@ Spaceship >> id [
 Spaceship >> initializeWith: anId [
 
 	id := anId.
-	avaliableForMercenary := true.
-	mercenaries := OrderedCollection new.
-	movementBySpeed := 0.
-	position := 1.
-	shield := 3.
+	physicalAttributes := PhysicalAttributes create.
+	battleAttributes := BattleAttributes create.
 	lapsCompleted := 0.
-	battleMultiplier := 1.
 	cards := OrderedCollection new.
 	state := AvailableState create
 ]
 
 { #category : #testing }
 Spaceship >> isAvaliableForMercenary [
-	^ avaliableForMercenary 
+	^ battleAttributes availableForMercenary.
 ]
 
 { #category : #accessing }
@@ -101,18 +94,18 @@ Spaceship >> lapsCompleted [
 { #category : #accessing }
 Spaceship >> mercenaries [
 
-	^ mercenaries
+	^ battleAttributes mercenaries.
 ]
 
 { #category : #accessing }
 Spaceship >> move: positionsToMove [
 
-	position := position + positionsToMove
+	physicalAttributes move: positionsToMove.
 ]
 
 { #category : #accessing }
 Spaceship >> movementBySpeed [
-	^ movementBySpeed
+	^ physicalAttributes movementBySpeed.
 ]
 
 { #category : #'as yet unclassified' }
@@ -130,23 +123,23 @@ Spaceship >> playTurn [
 { #category : #accessing }
 Spaceship >> position [
 
-	^ position
+	^ physicalAttributes position.
 ]
 
 { #category : #'as yet unclassified' }
 Spaceship >> recoverShields [
 
-	shield := 3
+	physicalAttributes recoverShields.
 ]
 
 { #category : #removing }
 Spaceship >> removeMercenary: aSpaceship [ 
-	mercenaries remove: aSpaceship.
+	battleAttributes removeMercenary: aSpaceship.
 ]
 
 { #category : #'as yet unclassified' }
 Spaceship >> removeSpeed [
-	movementBySpeed := movementBySpeed - 1.
+	physicalAttributes removeSpeed.
 ]
 
 { #category : #removing }
@@ -156,7 +149,7 @@ Spaceship >> removeThis: aCard [
 
 { #category : #accessing }
 Spaceship >> shield [
-	^ shield
+	^ physicalAttributes shield.
 ]
 
 { #category : #accessing }
@@ -172,10 +165,11 @@ Spaceship >> subtractLap [
 
 { #category : #'as yet unclassified' }
 Spaceship >> updateBattleMultiplier: aValue [ 
-	battleMultiplier := aValue.
+	battleAttributes updateBattleMultiplier: aValue.
 ]
 
 { #category : #'as yet unclassified' }
 Spaceship >> updateShield: amount [
-	shield := shield + amount.
+
+	physicalAttributes updateShield: amount
 ]

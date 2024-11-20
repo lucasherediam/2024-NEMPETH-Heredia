@@ -7,9 +7,9 @@ Class {
 { #category : #initialization }
 Double >> applyCardEffect: aCardArguments and: aGame [ 
 	 
-	| idOfAffectedSpaceship |
+	| idOfTargetSpaceship |
 	
-	idOfAffectedSpaceship := aCardArguments at: 'idTargetSpaceship'.
+	idOfTargetSpaceship := aCardArguments at: 'idTargetSpaceship'.
 	
-	aGame applyDoubleWith: idOfAffectedSpaceship.
+	aGame applyDoubleTo: idOfTargetSpaceship.
 ]

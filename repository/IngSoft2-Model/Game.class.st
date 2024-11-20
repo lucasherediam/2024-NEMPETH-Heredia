@@ -66,7 +66,7 @@ Game >> addPermanentCardPlayed: aCard [
 ]
 
 { #category : #'as yet unclassified' }
-Game >> applyDefendWith: anIdOfSpaceship [ 
+Game >> applyDefendTo: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceships detect: [ :aSpaceship |
@@ -76,7 +76,7 @@ Game >> applyDefendWith: anIdOfSpaceship [
 ]
 
 { #category : #'as yet unclassified' }
-Game >> applyDoubleWith: anIdOfSpaceship [ 
+Game >> applyDoubleTo: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceships detect: [ :aSpaceship |

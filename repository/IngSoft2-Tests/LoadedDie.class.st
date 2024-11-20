@@ -10,9 +10,17 @@ Class {
 }
 
 { #category : #'instance creation' }
-LoadedDie class >> of: aNumberOfFaces [ 
-	aNumberOfFaces < 3 ifTrue: [ Error signal: 'Faces should be more than 2' ].
-	^ self new initializeOf: aNumberOfFaces.
+LoadedDie class >> numberOfFacesValidation: aNumberOfFaces [
+
+	aNumberOfFaces < 3 ifTrue: [
+		Error signal: 'Faces should be more than 2' ]
+]
+
+{ #category : #'instance creation' }
+LoadedDie class >> of: aNumberOfFaces [
+
+	self numberOfFacesValidation: aNumberOfFaces.
+	^ self new initializeOf: aNumberOfFaces
 ]
 
 { #category : #adding }
