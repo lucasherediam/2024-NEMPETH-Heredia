@@ -8,6 +8,7 @@ Class {
 Cancellation >> applyCardEffect: aCardArguments and: aGame [ 
 	
 	| idTargetCard cardAffected |
+	
 	idTargetCard := aCardArguments at: 'idTargetCard'.
 	cardAffected := (aGame getPermanentCardPlayed) detect: [ :aCard | aCard id = idTargetCard ].
 	

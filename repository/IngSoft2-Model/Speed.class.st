@@ -11,6 +11,7 @@ Class {
 Speed >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceship idOfSpaceshipAtTurn |
+	
 	idOfAffectedSpaceship := aCardArguments at: 'idTargetSpaceship'.
 	idOfSpaceship := aCardArguments at: 'idSpaceship'.
 	idOfSpaceshipAtTurn := aGame getIdOfSpaceshipAtTurn.
