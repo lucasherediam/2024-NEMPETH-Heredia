@@ -44,6 +44,11 @@ Spaceship >> addSpeed [
 	physicalAttributes addSpeed.
 ]
 
+{ #category : #'as yet unclassified' }
+Spaceship >> applyDefend [
+	physicalAttributes applyDefendTo: self.
+]
+
 { #category : #accessing }
 Spaceship >> battleMultiplier [
 
@@ -58,6 +63,11 @@ Spaceship >> cards [
 { #category : #'as yet unclassified' }
 Spaceship >> changeAvailabilityForMercenary [
 	battleAttributes changeAvailabilityForMercenary.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> changeShieldStateTo: aShieldState [
+	physicalAttributes changeShieldStateTo: aShieldState.
 ]
 
 { #category : #'as yet unclassified' }
@@ -89,6 +99,11 @@ Spaceship >> isAvaliableForMercenary [
 { #category : #accessing }
 Spaceship >> lapsCompleted [
 	^ lapsCompleted
+]
+
+{ #category : #accessing }
+Spaceship >> maxShields [
+	^ physicalAttributes maxShields.
 ]
 
 { #category : #accessing }
@@ -124,6 +139,11 @@ Spaceship >> playTurn [
 Spaceship >> position [
 
 	^ physicalAttributes position.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> reachedMaxShields [
+	^ physicalAttributes reachedMaxShields.
 ]
 
 { #category : #'as yet unclassified' }
@@ -166,6 +186,11 @@ Spaceship >> subtractLap [
 { #category : #'as yet unclassified' }
 Spaceship >> updateBattleMultiplier: aValue [ 
 	battleAttributes updateBattleMultiplier: aValue.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> updateMaxShields: amount [
+	physicalAttributes updateMaxShields: amount.
 ]
 
 { #category : #'as yet unclassified' }

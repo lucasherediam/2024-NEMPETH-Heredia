@@ -71,7 +71,7 @@ Game >> applyDefendTo: anIdOfSpaceship [
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceships detect: [ :aSpaceship |
 		                     aSpaceship id = anIdOfSpaceship ].
-	affectedSpaceship updateShield: 1.
+	affectedSpaceship applyDefend.
 	lastCardPlayed := Defend.
 ]
 
@@ -133,6 +133,13 @@ Game >> checkAmountOfCardsOfSpaceships [
 	| spaceshipsSortedById |
 	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
 	^ spaceshipsSortedById collect: [ :spaceship | (spaceship cards) size ]
+]
+
+{ #category : #'as yet unclassified' }
+Game >> checkMaxShieldsOfSpaceships [
+	| spaceshipsSortedById |
+	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
+	^ spaceshipsSortedById collect: [ :spaceship | spaceship maxShields ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -349,35 +356,55 @@ Game >> verifyBattleWith: actualSpaceship [
 
 	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship multiplierForActualSpaceship multiplierForCounterSpaceship |
 	actualSpaceship position = 1 ifTrue: [ ^ self ].
-	
+
 	sumOfThrowsActualSpaceship := 0.
 	sumOfThrowsCounterSpaceship := 0.
-	
+
 	spaceshipsToFight := spaceships select: [ :spaceship |
-                           (spaceship position = actualSpaceship position) and: [ spaceship ~= actualSpaceship ]].
+		                     spaceship position = actualSpaceship position
+			                     and: [ spaceship ~= actualSpaceship ] ].
 
 	spaceshipsToFight := spaceshipsToFight reject: [ :aSpaceship |
 		                     aSpaceship mercenaries includes:
 			                     actualSpaceship ].
-		
+
 	spaceshipsToFight size = 1 ifFalse: [ ^ self ].
 
 
 	counterSpaceship := spaceshipsToFight first.
-	
-	multiplierForActualSpaceship :=  self getBattleMultiplierFor: actualSpaceship.
-	multiplierForCounterSpaceship := self getBattleMultiplierFor: counterSpaceship.
-	
-	1 to: (1 + actualSpaceship mercenaries size) do: [ :i | sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship + (self throwDices * (multiplierForActualSpaceship at: i)) ].
-	1 to: (1 + counterSpaceship mercenaries size) do: [ :i | sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship + (self throwDices * (multiplierForCounterSpaceship at: i))  ].
 
-	 sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
+	multiplierForActualSpaceship := self getBattleMultiplierFor:
+		                                actualSpaceship.
+	multiplierForCounterSpaceship := self getBattleMultiplierFor:
+		                                 counterSpaceship.
+
+	1 to: 1 + actualSpaceship mercenaries size do: [ :i |
+		sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship
+		                              +
+		                              (self throwDices
+		                               *
+		                               (multiplierForActualSpaceship at: i)) ].
+	1 to: 1 + counterSpaceship mercenaries size do: [ :i |
+		sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship
+		                               +
+		                               (self throwDices
+		                                *
+		                                (multiplierForCounterSpaceship at: i)) ].
+
+	sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [
 			actualSpaceship move: -1 * actualSpaceship position + 1.
 			actualSpaceship updateShield: -1.
-			actualSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]]
+			actualSpaceship changeShieldStateTo:
+				DoesNotHaveMaxShieldsState create.
+			actualSpaceship mercenaries do: [ :aMercenary |
+				aMercenary updateShield: -1.
+				aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create ] ]
 		ifFalse: [
 			counterSpaceship move: -1 * counterSpaceship position + 1.
 			counterSpaceship updateShield: -1.
-			counterSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]].
+			counterSpaceship changeShieldStateTo: DoesNotHaveMaxShieldsState create.
+			counterSpaceship mercenaries do: [ :aMercenary |
+				aMercenary updateShield: -1.
+				aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create. ] ]
 ]

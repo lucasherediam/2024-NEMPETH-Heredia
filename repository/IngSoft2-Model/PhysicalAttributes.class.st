@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'position',
 		'shield',
-		'movementBySpeed'
+		'movementBySpeed',
+		'shieldsState',
+		'maxShields'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -19,12 +21,29 @@ PhysicalAttributes >> addSpeed [
 	movementBySpeed := movementBySpeed + 1.
 ]
 
+{ #category : #'as yet unclassified' }
+PhysicalAttributes >> applyDefendTo: aSpaceship [ 
+	shieldsState applyDefendTo: aSpaceship.
+]
+
+{ #category : #'as yet unclassified' }
+PhysicalAttributes >> changeShieldStateTo: aShieldState [ 
+	shieldsState := aShieldState.
+]
+
 { #category : #initialization }
 PhysicalAttributes >> initializeWith [
 
 	position := 1.
 	shield := 3.
+	maxShields := 3.
+	shieldsState := DoesHaveMaxShieldsState create.
 	movementBySpeed := 0
+]
+
+{ #category : #accessing }
+PhysicalAttributes >> maxShields [
+	^ maxShields.
 ]
 
 { #category : #accessing }
@@ -43,6 +62,11 @@ PhysicalAttributes >> position [
 ]
 
 { #category : #'as yet unclassified' }
+PhysicalAttributes >> reachedMaxShields [
+	^ shield = maxShields.
+]
+
+{ #category : #'as yet unclassified' }
 PhysicalAttributes >> recoverShields [
 	shield := 3
 ]
@@ -55,6 +79,11 @@ PhysicalAttributes >> removeSpeed [
 { #category : #accessing }
 PhysicalAttributes >> shield [
 	^ shield
+]
+
+{ #category : #'as yet unclassified' }
+PhysicalAttributes >> updateMaxShields: amount [ 
+	maxShields := maxShields + amount.
 ]
 
 { #category : #'as yet unclassified' }
