@@ -132,7 +132,7 @@ Spaceship >> obtain: aCard [
 { #category : #'as yet unclassified' }
 Spaceship >> playTurn [
 
-	^ state playTurn: self
+	^ state playTurn: self.
 ]
 
 { #category : #accessing }

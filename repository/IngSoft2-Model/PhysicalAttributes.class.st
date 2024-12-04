@@ -68,7 +68,7 @@ PhysicalAttributes >> reachedMaxShields [
 
 { #category : #'as yet unclassified' }
 PhysicalAttributes >> recoverShields [
-	shield := 3
+	shield := maxShields.
 ]
 
 { #category : #removing }

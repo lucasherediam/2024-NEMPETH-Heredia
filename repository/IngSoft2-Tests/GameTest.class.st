@@ -2761,3 +2761,163 @@ GameTest >> test057WhenADefendCardIsPlayedTwoTimesInRowForTheSameSpaceshipThenTh
 	self assert: aGame checkMaxShieldsOfSpaceships equals: (OrderedCollection with: 4 with: 3).	 
 
 ]
+
+{ #category : #tests }
+GameTest >> test058WhenASpaceshipPassTurnAfterADefendCardHasIncreasedItsMaxShieldsThenTheShieldsOfTheSpaceshipShouldBeTheNewMaxShieldsNumber [
+
+	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aSequence := OrderedCollection withAll: #(1 1 1 3).
+	aDie add: aSequence.
+	dices := OrderedCollection with: aDie.
+
+	cards := OrderedCollection new.
+	cards add: (Defend createWithId: 1).
+	cards add: (Defend createWithId: 2).
+	cards add: (Defend createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	cards add: (Defend createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 3.
+	cardArguments at: 'idTargetSpaceship' put: 2.
+
+	aGame playCard: cardArguments.
+	
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 3).
+	self assert: aGame checkMaxShieldsOfSpaceships equals: (OrderedCollection with: 3 with: 4).	 
+
+	aGame playTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+		
+	aGame playTurn.
+	aGame passTurn.
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 4)
+]
+
+{ #category : #tests }
+GameTest >> test059WhenASpaceshipLosesAllItsShieldsAfterADefendCardHasIncreasedItsMaxShieldsThenTheShieldsOfTheSpaceshipShouldBeTheNewMaxShieldsNumber [
+
+	| dices aDie aSequence cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aSequence := OrderedCollection withAll: #(1 1 1 2 1 1 2 1 1 2 2).
+	aDie add: aSequence.
+	dices := OrderedCollection with: aDie.
+
+	cards := OrderedCollection new.
+	cards add: (Defend createWithId: 1).
+	cards add: (Defend createWithId: 2).
+	cards add: (Defend createWithId: 3).
+	cards add: (Defend createWithId: 4).
+	cards add: (Defend createWithId: 5).
+	aDeck := FiniteDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 3.
+	cardArguments at: 'idTargetSpaceship' put: 2.
+
+	aGame playCard: cardArguments.
+	
+	self
+		assert: aGame checkAmountOfCardsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 3).
+	self assert: aGame checkMaxShieldsOfSpaceships equals: (OrderedCollection with: 3 with: 4).	 
+
+	aGame playTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+		
+	aGame passTurn.
+	aGame playTurn.
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 1).
+		
+	aGame passTurn.
+	aGame playTurn.
+
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 0).
+		
+	aGame passTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 0).
+		
+	aGame passTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 0).
+		
+	aGame passTurn.
+	aGame playTurn.
+	
+	self
+		assert: aGame checkShieldsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 4).
+]

@@ -266,7 +266,9 @@ Game >> playTurn [
 	| actualSpaceship boxToCheck winner |
 	actualSpaceship := spaceships removeFirst.
 
-	actualSpaceship playTurn ifFalse: [ ^ self ].
+	actualSpaceship playTurn ifFalse: [
+		spaceships add: actualSpaceship.
+		^ self ].
 	actualSpaceship move: self throwDices + movementByAcceleration
 		+ actualSpaceship movementBySpeed.
 

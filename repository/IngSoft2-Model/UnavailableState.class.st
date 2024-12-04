@@ -28,6 +28,6 @@ UnavailableState >> playTurn: aSpaceship [
 			^ false ]
 		ifFalse: [
 			aSpaceship changeTo: AvailableState create.
-			aSpaceship updateShield: -1 * aSpaceship shield + 3.
+			aSpaceship recoverShields.
 			^ aSpaceship playTurn ]
 ]
