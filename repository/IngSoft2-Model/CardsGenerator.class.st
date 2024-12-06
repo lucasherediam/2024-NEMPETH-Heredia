@@ -1,13 +1,14 @@
 Class {
-	#name : #CardsGenerator,
-	#superclass : #Object,
+	#name : 'CardsGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'cards'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CardsGenerator class >> createWith: aNumberOfCards [
 
 	self numberOfCardsValidation: aNumberOfCards.
@@ -15,19 +16,19 @@ CardsGenerator class >> createWith: aNumberOfCards [
 	^ self new initializeWith: aNumberOfCards
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CardsGenerator class >> numberOfCardsValidation: aNumberOfCards [
 
 	aNumberOfCards <= 0 ifTrue: [
 		Error signal: 'Number of cards should be greater that zero' ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CardsGenerator >> cards [ 
 	^ cards.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CardsGenerator >> initializeWith: aNumberOfCards [
 
 	| randomGenerator randomValue cardMapping |

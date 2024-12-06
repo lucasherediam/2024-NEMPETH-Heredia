@@ -1,41 +1,42 @@
 Class {
-	#name : #BattleAttributes,
-	#superclass : #Object,
+	#name : 'BattleAttributes',
+	#superclass : 'Object',
 	#instVars : [
 		'battleMultiplier',
 		'avaliableForMercenary',
 		'mercenaries'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 BattleAttributes class >> create [
 	^ self new initializeWith.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BattleAttributes >> addMercenary: aSpaceship [ 
 	mercenaries add: aSpaceship.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BattleAttributes >> availableForMercenary [
 	^ avaliableForMercenary.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BattleAttributes >> battleMultiplier [
 	^ battleMultiplier
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BattleAttributes >> changeAvailabilityForMercenary [
 	
 	avaliableForMercenary := avaliableForMercenary not. 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BattleAttributes >> initializeWith [
 	battleMultiplier := 1.
 	avaliableForMercenary := true.
@@ -43,18 +44,18 @@ BattleAttributes >> initializeWith [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BattleAttributes >> mercenaries [
 	^ mercenaries
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BattleAttributes >> removeMercenary: aSpaceship [ 
 	
 	mercenaries remove: aSpaceship.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BattleAttributes >> updateBattleMultiplier: aValue [ 
 	
 	battleMultiplier := aValue.

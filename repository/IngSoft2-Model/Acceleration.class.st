@@ -1,10 +1,11 @@
 Class {
-	#name : #Acceleration,
-	#superclass : #PermanentCard,
-	#category : #'IngSoft2-Model'
+	#name : 'Acceleration',
+	#superclass : 'PermanentCard',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Acceleration >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceship idOfSpaceshipAtTurn |
@@ -19,7 +20,7 @@ Acceleration >> applyCardEffect: aCardArguments and: aGame [
 	aGame addPermanentCardPlayed: self
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Acceleration >> removeCardEffect: aCardCollection and: aGame [ 
 
 	aGame removeAcceleration.

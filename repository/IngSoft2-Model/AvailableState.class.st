@@ -1,16 +1,17 @@
 Class {
-	#name : #AvailableState,
-	#superclass : #SpaceshipState,
-	#category : #'IngSoft2-Model'
+	#name : 'AvailableState',
+	#superclass : 'SpaceshipState',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 AvailableState class >> create [
 
 	^ self new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AvailableState >> playTurn: aSpaceship [
 
 	aSpaceship shield > 0

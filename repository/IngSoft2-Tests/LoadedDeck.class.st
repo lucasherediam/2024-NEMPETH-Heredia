@@ -1,6 +1,6 @@
 Class {
-	#name : #LoadedDeck,
-	#superclass : #Object,
+	#name : 'LoadedDeck',
+	#superclass : 'Object',
 	#instVars : [
 		'index',
 		'cards',
@@ -10,16 +10,17 @@ Class {
 		'index',
 		'cards'
 	],
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LoadedDeck class >> createWith: aMapsOfCards [
 
 	^ self new initializeWith: aMapsOfCards
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LoadedDeck >> giveACard [
 
 	| card |
@@ -30,7 +31,7 @@ LoadedDeck >> giveACard [
 	^ card
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LoadedDeck >> initializeWith: aMapsOfCards [
 	
 	idForCard := 1.

@@ -1,15 +1,16 @@
 Class {
-	#name : #DoesNotHaveMaxShieldsState,
-	#superclass : #ShieldsState,
-	#category : #'IngSoft2-Model'
+	#name : 'DoesNotHaveMaxShieldsState',
+	#superclass : 'ShieldsState',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 DoesNotHaveMaxShieldsState class >> create [
 	^ self new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DoesNotHaveMaxShieldsState >> applyDefendTo: aSpaceship [ 
 	aSpaceship updateShield: 1.
 	aSpaceship reachedMaxShields ifTrue: [ 

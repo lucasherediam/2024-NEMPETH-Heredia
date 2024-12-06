@@ -1,15 +1,16 @@
 Class {
-	#name : #CardsGeneratorTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'CardsGeneratorTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 CardsGeneratorTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CardsGeneratorTest >> test001WhenThenCardsGeneratorIsAskedToGenerateOneCardThenItGeneratesOneCard [
 
 	| aCardsGenerator aCollectionOfCards |
@@ -21,7 +22,7 @@ CardsGeneratorTest >> test001WhenThenCardsGeneratorIsAskedToGenerateOneCardThenI
 	self assert: aCollectionOfCards size equals: 1.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CardsGeneratorTest >> test002VerifyCorrectDistributionsOfCards [
 
 	| aCardsGenerator aCollectionOfCards percent speedCards mercenaryCards accelerationCards cancellationCards redoCards repeatCards doubleCards defendCards |
@@ -78,7 +79,7 @@ CardsGeneratorTest >> test002VerifyCorrectDistributionsOfCards [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CardsGeneratorTest >> test003WhenNumberOfCardIsLessThanZeroThenThrowError [
 	self
 		should: [ CardsGenerator createWith: 0. ]

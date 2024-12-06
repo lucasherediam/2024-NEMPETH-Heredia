@@ -1,13 +1,14 @@
 Class {
-	#name : #PathGenerator,
-	#superclass : #Object,
+	#name : 'PathGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'path'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PathGenerator class >> createWith: aLength and: aRatio and: aDeck [ 
 	
 	self ratioValidation: aRatio.
@@ -15,14 +16,14 @@ PathGenerator class >> createWith: aLength and: aRatio and: aDeck [
 	^ self new initializeWith: aLength and: aRatio and: aDeck
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PathGenerator class >> ratioValidation: aRatio [
 
 	aRatio <= 0 ifTrue: [
 		Error signal: 'Parsec to boxes ratio should be greater that zero' ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PathGenerator >> createWormhole [
 	
 	| wormholeOne wormholeTwo |
@@ -36,7 +37,7 @@ PathGenerator >> createWormhole [
 	^OrderedCollection with: wormholeOne with: wormholeTwo.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PathGenerator >> initializeWith: aLength and: aRatio and: aDeck [ 
 	| randomGenerator randomValue |
 	path := OrderedCollection new.
@@ -64,7 +65,7 @@ PathGenerator >> initializeWith: aLength and: aRatio and: aDeck [
 	path addFirst: NormalBox new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PathGenerator >> path [
 	^path.
 ]

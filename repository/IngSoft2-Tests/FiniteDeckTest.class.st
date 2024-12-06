@@ -1,15 +1,16 @@
 Class {
-	#name : #FiniteDeckTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'FiniteDeckTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 FiniteDeckTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test001WhenTheFiniteDeckIsAskedForACardThenGivesACard [
 
 	| aCardsGenerator cards aDeck cardOne cardTwo |
@@ -28,7 +29,7 @@ FiniteDeckTest >> test001WhenTheFiniteDeckIsAskedForACardThenGivesACard [
 	self assert: (aDeck cards) size equals: 8. 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test002WhenAnSpaceshipPlaysACardThenTheCardGoesToDiscardDeck [
 
 	| aDie dices cards aDeck aNormalBoxOne aNormalBoxTwo aPath aBoard aGame cardArguments |
@@ -89,7 +90,7 @@ FiniteDeckTest >> test002WhenAnSpaceshipPlaysACardThenTheCardGoesToDiscardDeck [
 	self assert:  (aDeck discardDeck) size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test003WhenTheFiniteDeckIsEmptyThenReturnsFalseWhenIsAskedForACard [
 
 	| aCardsGenerator cards aDeck cardOne cardTwo |
@@ -109,7 +110,7 @@ FiniteDeckTest >> test003WhenTheFiniteDeckIsEmptyThenReturnsFalseWhenIsAskedForA
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test004WhenTheFiniteDeckDoesNotHaveMoreCardsThenShufflesTheDiscardDeckAndUsesThatDeck [
 
 	| aDie dices cards aDeck aCardBoxOne aCardBoxTwo aPath aBoard aGame cardArguments |
@@ -175,7 +176,7 @@ FiniteDeckTest >> test004WhenTheFiniteDeckDoesNotHaveMoreCardsThenShufflesTheDis
 		equals: (OrderedCollection with: 2 with: 1).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test005WhenTheFiniteDeckDoesNotHaveMoreCardsAndTheDiscardDeckNeitherThenTheCardBoxDoesNotGiveACard [
 	| aDie dices cards aDeck aCardBoxOne aCardBoxTwo aPath aBoard aGame |
 	aDie := LoadedDie of: 10.
@@ -222,7 +223,7 @@ FiniteDeckTest >> test005WhenTheFiniteDeckDoesNotHaveMoreCardsAndTheDiscardDeckN
 		equals: (OrderedCollection with: 2 with: 2).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FiniteDeckTest >> test006WhenAFiniteDeckIsCreatedWithNoCardsThenThrowError [
 
 	| cards |

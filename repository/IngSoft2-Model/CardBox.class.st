@@ -1,18 +1,19 @@
 Class {
-	#name : #CardBox,
-	#superclass : #Box,
+	#name : 'CardBox',
+	#superclass : 'Box',
 	#instVars : [
 		'deck'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CardBox class >> createWith: aDeck [ 
 	^ self new initializeWith: aDeck
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CardBox >> applyEffect: spaceships and: actualSpaceship [
 
 	| aCard |
@@ -21,7 +22,7 @@ CardBox >> applyEffect: spaceships and: actualSpaceship [
 	aCard ifNotNil: [ actualSpaceship obtain: aCard ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CardBox >> initializeWith: aDeck [ 
 	deck := aDeck
 ]

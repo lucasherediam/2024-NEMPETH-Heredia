@@ -1,10 +1,11 @@
 Class {
-	#name : #BoxTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'BoxTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test001WhenSpaceshipIsOnBlackHoleBoxThenSpaceshipMovesBackFourBoxes [
 	
 	|actualSpaceship aSpaceship anotherSpaceship spaceships aBlackHole|
@@ -27,7 +28,7 @@ BoxTest >> test001WhenSpaceshipIsOnBlackHoleBoxThenSpaceshipMovesBackFourBoxes [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test002WhenSpaceshipIsOnHyperSpaceJumpBoxThenSpaceshipMovesFourBoxesAndLosesOneShield [
 	
 	|aSpaceship anotherSpaceship spaceships aHyperSpaceJump actualSpaceship|
@@ -54,7 +55,7 @@ BoxTest >> test002WhenSpaceshipIsOnHyperSpaceJumpBoxThenSpaceshipMovesFourBoxesA
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test003WhenSpaceshipIsOnAtomicBombBoxThenAllSpaceshipMoveToPositionOneAndLoseOneShield [
 	
 	|spaceshipOne spaceshipTwo spaceshipThree spaceships aAtomicBomb actualSpaceship |
@@ -90,7 +91,7 @@ BoxTest >> test003WhenSpaceshipIsOnAtomicBombBoxThenAllSpaceshipMoveToPositionOn
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test004WhenSpaceshipIsOnMoonWalkThenTheOtherSpaceshipsMovesBackTwoPositionsExceptForTheOnesOnTheSafeZone [
 	
 	|spaceshipOne spaceshipTwo spaceshipThree spaceships aMoonWalk actualSpaceship|
@@ -120,7 +121,7 @@ BoxTest >> test004WhenSpaceshipIsOnMoonWalkThenTheOtherSpaceshipsMovesBackTwoPos
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test005WhenASpaceshipIsOnHyperJumpThenSpaceshipMovesASelectedAmountOfParsecs [
 	
 	|spaceshipOne spaceshipTwo spaceshipThree spaceships aHyperJump parsecOne lightYearOne lightYearTwo |
@@ -151,7 +152,7 @@ BoxTest >> test005WhenASpaceshipIsOnHyperJumpThenSpaceshipMovesASelectedAmountOf
 	self assert: spaceshipTwo position equals: 5.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test006WhenAmountOfEffectsAppliedAreMoreThanCollectionOfParsecsThenStartFromBeginning [
 	
 	|spaceshipOne spaceshipTwo spaceshipThree spaceships aHyperJump parsecOne lightYearOne |
@@ -186,7 +187,7 @@ BoxTest >> test006WhenAmountOfEffectsAppliedAreMoreThanCollectionOfParsecsThenSt
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test007VerifyCorrectCreationOfHyperJumpBox [
 
 	| aHyperJump sortedColletion |
@@ -201,7 +202,7 @@ BoxTest >> test007VerifyCorrectCreationOfHyperJumpBox [
 	self assert: aHyperJump units equals: sortedColletion.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test008WhenHyperJumpApplyEffectThenSpaceshipIsMoveBetweenOneAndTwentyBoxes [
 
 	| aHyperJump spaceships aSpaceship anotherSpaceship actualSpaceship |
@@ -219,7 +220,7 @@ BoxTest >> test008WhenHyperJumpApplyEffectThenSpaceshipIsMoveBetweenOneAndTwenty
 	self assert: anotherSpaceship position equals: 1.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> test009WhenCardBoxApplyEffectThenSpaceshipAddACardOnItsPrivateDeck [
     
     | cards aDeck aCardBox spaceships aSpaceship anotherSpaceship actualSpaceship |

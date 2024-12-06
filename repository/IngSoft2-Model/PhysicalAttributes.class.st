@@ -1,6 +1,6 @@
 Class {
-	#name : #PhysicalAttributes,
-	#superclass : #Object,
+	#name : 'PhysicalAttributes',
+	#superclass : 'Object',
 	#instVars : [
 		'position',
 		'shield',
@@ -8,30 +8,31 @@ Class {
 		'shieldsState',
 		'maxShields'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 PhysicalAttributes class >> create [
 	^ self new initializeWith
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 PhysicalAttributes >> addSpeed [
 	movementBySpeed := movementBySpeed + 1.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> applyDefendTo: aSpaceship [ 
 	shieldsState applyDefendTo: aSpaceship.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> changeShieldStateTo: aShieldState [ 
 	shieldsState := aShieldState.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhysicalAttributes >> initializeWith [
 
 	position := 1.
@@ -41,52 +42,52 @@ PhysicalAttributes >> initializeWith [
 	movementBySpeed := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhysicalAttributes >> maxShields [
 	^ maxShields.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhysicalAttributes >> move: positionsToMove [ 
 	position := position + positionsToMove
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhysicalAttributes >> movementBySpeed [
 	^ movementBySpeed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhysicalAttributes >> position [
 	^ position
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> reachedMaxShields [
 	^ shield = maxShields.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> recoverShields [
 	shield := maxShields.
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 PhysicalAttributes >> removeSpeed [
 	movementBySpeed := movementBySpeed - 1.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhysicalAttributes >> shield [
 	^ shield
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> updateMaxShields: amount [ 
 	maxShields := maxShields + amount.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhysicalAttributes >> updateShield: amount [ 
 	shield := shield + amount.
 ]

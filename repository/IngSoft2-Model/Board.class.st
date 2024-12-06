@@ -1,20 +1,21 @@
 Class {
-	#name : #Board,
-	#superclass : #Object,
+	#name : 'Board',
+	#superclass : 'Object',
 	#instVars : [
 		'path'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Board class >> createWith: aPath [
 
 	self lengthValidation: aPath.
 	^ self new initializeWith: aPath.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Board class >> lengthValidation: aPath [
 
 	(aPath size <= 0) ifTrue: [
@@ -22,25 +23,25 @@ Board class >> lengthValidation: aPath [
 			'Path should have a least three box']
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Board >> findBoxIn:  aPosition [
 
 	^ path at: aPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Board >> initializeWith: aPath [
 	
 	path := aPath.
 	path withIndexDo: [ :box :index | box position: index ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Board >> length [
 	^ path size.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Board >> normalizeAll: spaceships [
 
 	self normalizeForwards: spaceships.
@@ -48,7 +49,7 @@ Board >> normalizeAll: spaceships [
 	self normalizeBackwards: spaceships
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Board >> normalizeBackwards: spaceships [
 
 	spaceships do: [ :aSpaceship |
@@ -58,7 +59,7 @@ Board >> normalizeBackwards: spaceships [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Board >> normalizeFirstBox: spaceships [
 
 	spaceships do: [ :aSpaceship |
@@ -66,7 +67,7 @@ Board >> normalizeFirstBox: spaceships [
 			aSpaceship move: -1 * aSpaceship position + 1 ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Board >> normalizeForwards: spaceships [
 
 	spaceships do: [ :aSpaceship |
@@ -75,7 +76,7 @@ Board >> normalizeForwards: spaceships [
 			aSpaceship addLap ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 Board >> normalizeOne: aSpaceship [
 
 	[ aSpaceship position > self length ] whileTrue: [

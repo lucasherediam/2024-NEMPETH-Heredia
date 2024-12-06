@@ -1,15 +1,16 @@
 Class {
-	#name : #ShieldsState,
-	#superclass : #Object,
-	#category : #'IngSoft2-Model'
+	#name : 'ShieldsState',
+	#superclass : 'Object',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ShieldsState class >> create [
 	self subclassResponsibility.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 ShieldsState >> applyDefendTo: aSpaceship [ 
 	self subclassResponsibility.
 ]

@@ -1,15 +1,16 @@
 Class {
-	#name : #LoadedDieTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'LoadedDieTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 LoadedDieTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LoadedDieTest >> test001WhenDieIsCreatedWithThreeFacesAndACollectionOfNumbersIsAddedThenWhenThrowReturnTheNumbersInTheCollection [
 
 	| aLoadedDie aSequence |
@@ -27,7 +28,7 @@ LoadedDieTest >> test001WhenDieIsCreatedWithThreeFacesAndACollectionOfNumbersIsA
 	self assert: aLoadedDie throw equals: 3.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LoadedDieTest >> test002WhenDieIsCreatedWithThreeFacesAndTheCollectionOfNumbersHasANumberGreaterThanNumberOfFacesThenThrowError [
 	| aLoadedDie aSequence |
 	aLoadedDie := LoadedDie of: 3.
@@ -40,7 +41,7 @@ LoadedDieTest >> test002WhenDieIsCreatedWithThreeFacesAndTheCollectionOfNumbersH
 		withMessage: 'Numbers in the sequence should be smaller than number of faces'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LoadedDieTest >> testWhenDieIsCreatedWithTwoFacesThenThrowError [
 
 	self
