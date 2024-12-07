@@ -2609,6 +2609,10 @@ GameTest >> test054WhenADoubleCardIsPlayedThenTheAffectedSpaceshipDoublesTheValu
 
 	aGame playCard: cardArguments.
 
+	self
+		assert: aGame checkMultiplierOfSpaceship
+		equals: (OrderedCollection with: 2 with: 1).
+
 	aGame playTurn.
 	aGame playTurn.
 	aGame playTurn.
@@ -2623,7 +2627,12 @@ GameTest >> test054WhenADoubleCardIsPlayedThenTheAffectedSpaceshipDoublesTheValu
 
 	self
 		assert: aGame checkPositionsOfSpaceships
-		equals: (OrderedCollection with: 3 with: 1)
+		equals: (OrderedCollection with: 3 with: 1).
+
+
+	self
+		assert: aGame checkMultiplierOfSpaceship
+		equals: (OrderedCollection with: 1 with: 1)
 ]
 
 { #category : 'tests' }
@@ -2675,6 +2684,10 @@ GameTest >> test055WhenADoubleCardIsPlayedToAMercenaryThenTheAffectedSpaceshipDo
 	anotherCardArguments at: 'idTargetSpaceship' put: 3.
 	aGame playCard: anotherCardArguments.
 	
+	self
+		assert: aGame checkMultiplierOfSpaceship
+		equals: (OrderedCollection with: 1 with: 1 with: 2).
+	
 	aGame playTurn.
 	aGame playTurn.
 	aGame playTurn.
@@ -2690,7 +2703,11 @@ GameTest >> test055WhenADoubleCardIsPlayedToAMercenaryThenTheAffectedSpaceshipDo
 
 	self
 		assert: aGame checkPositionsOfSpaceships
-		equals: (OrderedCollection with: 3 with: 1 with: 4)
+		equals: (OrderedCollection with: 3 with: 1 with: 4).
+		
+	self
+		assert: aGame checkMultiplierOfSpaceship
+		equals: (OrderedCollection with: 1 with: 1 with: 1).
 ]
 
 { #category : 'tests' }

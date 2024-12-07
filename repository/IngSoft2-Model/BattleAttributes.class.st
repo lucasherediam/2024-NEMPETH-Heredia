@@ -56,6 +56,11 @@ BattleAttributes >> removeMercenary: aSpaceship [
 ]
 
 { #category : 'as yet unclassified' }
+BattleAttributes >> restoreMultiplier [
+	battleMultiplier := 1.
+]
+
+{ #category : 'as yet unclassified' }
 BattleAttributes >> updateBattleMultiplier: aValue [ 
 	
 	battleMultiplier := aValue.

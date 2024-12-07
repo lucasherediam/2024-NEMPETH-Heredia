@@ -67,6 +67,18 @@ Game >> addPermanentCardPlayed: aCard [
 ]
 
 { #category : 'as yet unclassified' }
+Game >> applyBattleLossEffectsTo: aSpaceship [
+
+	aSpaceship move: -1 * aSpaceship position + 1.
+	aSpaceship updateShield: -1.
+	aSpaceship changeShieldStateTo:
+		DoesNotHaveMaxShieldsState create.
+	aSpaceship mercenaries do: [ :aMercenary |
+		aMercenary updateShield: -1.
+		aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create ]
+]
+
+{ #category : 'as yet unclassified' }
 Game >> applyDefendTo: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
@@ -144,6 +156,13 @@ Game >> checkMaxShieldsOfSpaceships [
 ]
 
 { #category : 'as yet unclassified' }
+Game >> checkMultiplierOfSpaceship [
+	| spaceshipsSortedById |
+	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
+	^ spaceshipsSortedById collect: [ :spaceship | spaceship battleMultiplier ]
+]
+
+{ #category : 'as yet unclassified' }
 Game >> checkPositionsOfSpaceships [
 	| spaceshipsSortedById |
 	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
@@ -184,13 +203,6 @@ Game >> createSpaceships: numberOfSpaceships [
 		anSpaceship obtain: (deck giveACard).
 	aCollectionOfSpaceships add: anSpaceship ].
 	^ aCollectionOfSpaceships
-]
-
-{ #category : 'as yet unclassified' }
-Game >> getBattleMultiplierFor: aSpaceship [ 
-    ^ (OrderedCollection with: aSpaceship battleMultiplier)
-        , ((aSpaceship mercenaries) collect: [:aMercenarySpaceship | aMercenarySpaceship battleMultiplier]).
-
 ]
 
 { #category : 'as yet unclassified' }
@@ -357,7 +369,7 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 { #category : 'as yet unclassified' }
 Game >> verifyBattleWith: actualSpaceship [
 
-	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship multiplierForActualSpaceship multiplierForCounterSpaceship |
+	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship actualSpaceshipAndMercenaries counterSpaceship counterSpaceshipAndMercenaries |
 	actualSpaceship position = 1 ifTrue: [ ^ self ].
 
 	sumOfThrowsActualSpaceship := 0.
@@ -373,41 +385,32 @@ Game >> verifyBattleWith: actualSpaceship [
 
 	spaceshipsToFight size = 1 ifFalse: [ ^ self ].
 
-
 	counterSpaceship := spaceshipsToFight first.
 
-	multiplierForActualSpaceship := self getBattleMultiplierFor:
-		                                actualSpaceship.
-	multiplierForCounterSpaceship := self getBattleMultiplierFor:
-		                                 counterSpaceship.
+	actualSpaceshipAndMercenaries := (OrderedCollection with:
+		                                  actualSpaceship)
+	                                 , actualSpaceship mercenaries.
+	counterSpaceshipAndMercenaries := (OrderedCollection with:
+		                                   counterSpaceship)
+	                                  , counterSpaceship mercenaries.
 
-	1 to: 1 + actualSpaceship mercenaries size do: [ :i |
+	actualSpaceshipAndMercenaries do: [ :spaceship |
 		sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship
 		                              +
 		                              (self throwDices
-		                               *
-		                               (multiplierForActualSpaceship at: i)) ].
-	1 to: 1 + counterSpaceship mercenaries size do: [ :i |
+		                               * spaceship battleMultiplier).
+		spaceship restoreMultiplier ].
+
+	counterSpaceshipAndMercenaries do: [ :spaceship |
 		sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship
 		                               +
 		                               (self throwDices
-		                                *
-		                                (multiplierForCounterSpaceship at: i)) ].
+		                                * spaceship battleMultiplier).
+		spaceship restoreMultiplier ].
 
 	sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [
-			actualSpaceship move: -1 * actualSpaceship position + 1.
-			actualSpaceship updateShield: -1.
-			actualSpaceship changeShieldStateTo:
-				DoesNotHaveMaxShieldsState create.
-			actualSpaceship mercenaries do: [ :aMercenary |
-				aMercenary updateShield: -1.
-				aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create ] ]
+			self applyBattleLossEffectsTo: actualSpaceship. ]
 		ifFalse: [
-			counterSpaceship move: -1 * counterSpaceship position + 1.
-			counterSpaceship updateShield: -1.
-			counterSpaceship changeShieldStateTo: DoesNotHaveMaxShieldsState create.
-			counterSpaceship mercenaries do: [ :aMercenary |
-				aMercenary updateShield: -1.
-				aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create. ] ]
+			self applyBattleLossEffectsTo: counterSpaceship. ]
 ]

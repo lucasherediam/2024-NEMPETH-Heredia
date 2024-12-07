@@ -168,6 +168,11 @@ Spaceship >> removeThis: aCard [
 	self cards remove: aCard.
 ]
 
+{ #category : 'as yet unclassified' }
+Spaceship >> restoreMultiplier [
+	battleAttributes restoreMultiplier.
+]
+
 { #category : 'accessing' }
 Spaceship >> shield [
 	^ physicalAttributes shield.
