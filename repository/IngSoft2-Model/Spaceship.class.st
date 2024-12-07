@@ -190,6 +190,21 @@ Spaceship >> subtractLap [
 ]
 
 { #category : 'as yet unclassified' }
+Spaceship >> throwDicesForBattleIn: aGame [
+
+	| resultOfThrowDices actualSpaceshipAndMercenaries |
+	resultOfThrowDices := 0.
+	actualSpaceshipAndMercenaries := (OrderedCollection with: self)
+	                                 , self mercenaries.
+	actualSpaceshipAndMercenaries do: [ :spaceship |
+		resultOfThrowDices := resultOfThrowDices
+		                      +
+		                      (aGame throwDices * spaceship battleMultiplier).
+		spaceship restoreMultiplier ].
+	^ resultOfThrowDices
+]
+
+{ #category : 'as yet unclassified' }
 Spaceship >> updateBattleMultiplier: aValue [ 
 	battleAttributes updateBattleMultiplier: aValue.
 ]

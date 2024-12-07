@@ -70,10 +70,7 @@ Game >> addPermanentCardPlayed: aCard [
 Game >> applyBattleLossEffectsTo: aSpaceship [
 
 	aSpaceship move: -1 * aSpaceship position + 1.
-	aSpaceship updateShield: -1.
-	aSpaceship changeShieldStateTo:
-		DoesNotHaveMaxShieldsState create.
-	aSpaceship mercenaries do: [ :aMercenary |
+	(( OrderedCollection with: aSpaceship ), aSpaceship mercenaries) do: [ :aMercenary |
 		aMercenary updateShield: -1.
 		aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create ]
 ]
@@ -369,11 +366,8 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 { #category : 'as yet unclassified' }
 Game >> verifyBattleWith: actualSpaceship [
 
-	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship actualSpaceshipAndMercenaries counterSpaceship counterSpaceshipAndMercenaries |
+	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship |
 	actualSpaceship position = 1 ifTrue: [ ^ self ].
-
-	sumOfThrowsActualSpaceship := 0.
-	sumOfThrowsCounterSpaceship := 0.
 
 	spaceshipsToFight := spaceships select: [ :spaceship |
 		                     spaceship position = actualSpaceship position
@@ -386,28 +380,10 @@ Game >> verifyBattleWith: actualSpaceship [
 	spaceshipsToFight size = 1 ifFalse: [ ^ self ].
 
 	counterSpaceship := spaceshipsToFight first.
-
-	actualSpaceshipAndMercenaries := (OrderedCollection with:
-		                                  actualSpaceship)
-	                                 , actualSpaceship mercenaries.
-	counterSpaceshipAndMercenaries := (OrderedCollection with:
-		                                   counterSpaceship)
-	                                  , counterSpaceship mercenaries.
-
-	actualSpaceshipAndMercenaries do: [ :spaceship |
-		sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship
-		                              +
-		                              (self throwDices
-		                               * spaceship battleMultiplier).
-		spaceship restoreMultiplier ].
-
-	counterSpaceshipAndMercenaries do: [ :spaceship |
-		sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship
-		                               +
-		                               (self throwDices
-		                                * spaceship battleMultiplier).
-		spaceship restoreMultiplier ].
-
+	
+	sumOfThrowsActualSpaceship := actualSpaceship throwDicesForBattleIn: self.
+	sumOfThrowsCounterSpaceship := counterSpaceship throwDicesForBattleIn: self.
+	
 	sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [
 			self applyBattleLossEffectsTo: actualSpaceship. ]
