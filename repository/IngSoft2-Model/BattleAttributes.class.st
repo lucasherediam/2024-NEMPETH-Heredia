@@ -63,5 +63,5 @@ BattleAttributes >> restoreMultiplier [
 { #category : 'as yet unclassified' }
 BattleAttributes >> updateBattleMultiplier: aValue [ 
 	
-	battleMultiplier := aValue.
+	battleMultiplier := battleMultiplier * aValue.
 ]
