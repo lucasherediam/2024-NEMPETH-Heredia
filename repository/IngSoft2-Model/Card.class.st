@@ -14,6 +14,11 @@ Card class >> createWithId: anId [
 	^ self new initializeWith: anId
 ]
 
+{ #category : 'adding' }
+Card >> addToDiscard: aDeck [ 
+	^ nil.
+]
+
 { #category : 'initialization' }
 Card >> applyCardEffect: aCardArguments and: aGame [ 
 

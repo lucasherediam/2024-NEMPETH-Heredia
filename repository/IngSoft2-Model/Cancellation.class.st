@@ -15,4 +15,6 @@ Cancellation >> applyCardEffect: aCardArguments and: aGame [
 	
 	cardAffected removeCardEffect: aCardArguments and: aGame.
 	
+	aGame addToDiscardDeck: cardAffected.
+	
 ]

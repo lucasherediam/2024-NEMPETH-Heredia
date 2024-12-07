@@ -66,6 +66,11 @@ Game >> addPermanentCardPlayed: aCard [
 	permanentCardsPlayed add: aCard
 ]
 
+{ #category : 'adding' }
+Game >> addToDiscardDeck: aCard [
+	deck addToDiscardDeck: aCard.
+]
+
 { #category : 'as yet unclassified' }
 Game >> applyBattleLossEffectsTo: aSpaceship [
 
@@ -265,9 +270,11 @@ Game >> playCard: aCardArguments [
 	card := actualSpaceship cards detect: [ :aCard | aCard id = idOfCard ].
 
 	card applyCardEffect: aCardArguments and: self.
+	
 	actualSpaceship removeThis: card.
 	
-	deck addToDiscardDeck: card.
+	card addToDiscard: deck.
+	
 ]
 
 { #category : 'as yet unclassified' }
