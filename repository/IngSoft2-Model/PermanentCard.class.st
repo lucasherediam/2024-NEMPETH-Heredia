@@ -6,6 +6,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PermanentCard >> discard: aRedo in: aGame [ 
+	^ nil.
+]
+
+{ #category : 'as yet unclassified' }
 PermanentCard >> permanentCardValidationWith: idOfSpaceship and: idOfSpaceshipAtTurn [
 
 	idOfSpaceship ~= idOfSpaceshipAtTurn ifTrue: [

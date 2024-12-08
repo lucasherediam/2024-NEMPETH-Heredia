@@ -2,7 +2,8 @@ Class {
 	#name : 'Card',
 	#superclass : 'Object',
 	#instVars : [
-		'id'
+		'id',
+		'createByRedo'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -25,6 +26,11 @@ Card >> applyCardEffect: aCardArguments and: aGame [
 	self subclassResponsibility.
 ]
 
+{ #category : 'as yet unclassified' }
+Card >> createdByRedo [
+	createByRedo := true.
+]
+
 { #category : 'accessing' }
 Card >> id [
 
@@ -35,4 +41,10 @@ Card >> id [
 Card >> initializeWith: anId [
 
 	id := anId.
+	createByRedo := false.
+]
+
+{ #category : 'testing' }
+Card >> isCreatedByRedo [
+	^ createByRedo.
 ]

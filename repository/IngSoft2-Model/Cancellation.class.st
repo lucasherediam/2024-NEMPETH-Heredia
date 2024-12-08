@@ -6,15 +6,17 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Cancellation >> applyCardEffect: aCardArguments and: aGame [ 
-	
+Cancellation >> applyCardEffect: aCardArguments and: aGame [
+
 	| idTargetCard cardAffected |
-	
 	idTargetCard := aCardArguments at: 'idTargetCard'.
-	cardAffected := (aGame getPermanentCardPlayed) detect: [ :aCard | aCard id = idTargetCard ].
-	
+	cardAffected := aGame getPermanentCardPlayed detect: [ :aCard |
+		                aCard id = idTargetCard ].
+
 	cardAffected removeCardEffect: aCardArguments and: aGame.
-	
-	aGame addToDiscardDeck: cardAffected.
-	
+
+	cardAffected isCreatedByRedo
+		ifTrue: [
+		aGame addToDiscardDeck: (Redo createWithId: cardAffected id) ]
+		ifFalse: [ aGame addToDiscardDeck: cardAffected ]
 ]
