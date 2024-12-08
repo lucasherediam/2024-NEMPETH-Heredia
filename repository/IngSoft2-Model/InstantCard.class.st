@@ -11,6 +11,6 @@ InstantCard >> addToDiscard: deck [
 ]
 
 { #category : 'as yet unclassified' }
-InstantCard >> discard: aRedo in: aGame [ 
+InstantCard >> discardByCardType: aRedo in: aGame [ 
 	aGame addToDiscardDeck: aRedo.
 ]

@@ -15,8 +15,9 @@ Cancellation >> applyCardEffect: aCardArguments and: aGame [
 
 	cardAffected removeCardEffect: aCardArguments and: aGame.
 
-	cardAffected isCreatedByRedo
+	cardAffected discardByRedoStateIn: aGame.
+	"cardAffected isCreatedByRedo
 		ifTrue: [
 		aGame addToDiscardDeck: (Redo createWithId: cardAffected id) ]
-		ifFalse: [ aGame addToDiscardDeck: cardAffected ]
+		ifFalse: [ aGame addToDiscardDeck: cardAffected ]"
 ]

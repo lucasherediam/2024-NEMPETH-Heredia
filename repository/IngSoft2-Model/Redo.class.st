@@ -13,10 +13,10 @@ Redo >> applyCardEffect: aCardArguments and: aGame [
 	self lastCardPlayedValidation: lastCardPlayed.
 
 	card := lastCardPlayed createWithId: self id.
-	card createdByRedo.
+	card changeRedoStateTo: CreatedByRedo create.
 	card applyCardEffect: aCardArguments and: aGame.
 
-	card discard: self in: aGame
+	card discardByCardType: self in: aGame
 ]
 
 { #category : 'as yet unclassified' }

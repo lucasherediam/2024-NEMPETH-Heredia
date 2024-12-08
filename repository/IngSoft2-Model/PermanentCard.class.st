@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PermanentCard >> discard: aRedo in: aGame [ 
+PermanentCard >> discardByCardType: aRedo in: aGame [ 
 	^ nil.
 ]
 

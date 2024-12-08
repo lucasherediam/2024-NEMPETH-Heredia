@@ -3,7 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'id',
-		'createByRedo'
+		'redoState'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -27,8 +27,13 @@ Card >> applyCardEffect: aCardArguments and: aGame [
 ]
 
 { #category : 'as yet unclassified' }
-Card >> createdByRedo [
-	createByRedo := true.
+Card >> changeRedoStateTo: aRedoState [ 
+	redoState := aRedoState.
+]
+
+{ #category : 'as yet unclassified' }
+Card >> discardByRedoStateIn: aGame [ 
+	redoState discard: self in: aGame
 ]
 
 { #category : 'accessing' }
@@ -41,10 +46,5 @@ Card >> id [
 Card >> initializeWith: anId [
 
 	id := anId.
-	createByRedo := false.
-]
-
-{ #category : 'testing' }
-Card >> isCreatedByRedo [
-	^ createByRedo.
+	redoState := NotCreatedByRedo create
 ]
