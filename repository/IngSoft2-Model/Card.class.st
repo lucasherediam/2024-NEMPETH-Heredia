@@ -46,5 +46,4 @@ Card >> id [
 Card >> initializeWith: anId [
 
 	id := anId.
-	redoState := NotCreatedByRedo create
 ]

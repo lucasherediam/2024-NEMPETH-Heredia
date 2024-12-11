@@ -10,6 +10,13 @@ PermanentCard >> discardByCardType: aRedo in: aGame [
 	^ nil.
 ]
 
+{ #category : 'initialization' }
+PermanentCard >> initializeWith: anId [
+
+	id := anId.
+	redoState := NotCreatedByRedo create
+]
+
 { #category : 'as yet unclassified' }
 PermanentCard >> permanentCardValidationWith: idOfSpaceship and: idOfSpaceshipAtTurn [
 
