@@ -1,6 +1,6 @@
 Class {
-	#name : #Game,
-	#superclass : #Object,
+	#name : 'Game',
+	#superclass : 'Object',
 	#instVars : [
 		'spaceships',
 		'dices',
@@ -12,17 +12,18 @@ Class {
 		'lastBox',
 		'board'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Game class >> amountOfLapsToWinValidation: amountOfLapsToWin [
 
 	amountOfLapsToWin < 1 ifTrue: [
 		Error signal: 'Laps to win should be greater than zero' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game class >> createWithNumberOfSpaceships: numberOfSpaceships and: aCollectionOfDices and: aDeck and: aBoard andLapsToWin: amountOfLapsToWin [ 
 
 	self dicesValidation: aCollectionOfDices.
@@ -37,21 +38,21 @@ Game class >> createWithNumberOfSpaceships: numberOfSpaceships and: aCollectionO
 		  andLapsToWin: amountOfLapsToWin
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Game class >> dicesValidation: aCollectionOfDices [
 
 	aCollectionOfDices size < 1 ifTrue: [
 		Error signal: 'Game should have a least one die' ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Game class >> spaceshipsValidation: numberOfSpaceships [
 
 	numberOfSpaceships < 2 ifTrue: [
 		Error signal: 'Game should have a least two spaceships' ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 Game >> addAcceleration [
 
 	movementByAcceleration := movementByAcceleration + 1.
@@ -59,23 +60,37 @@ Game >> addAcceleration [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> addPermanentCardPlayed: aCard [
 
 	permanentCardsPlayed add: aCard
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'adding' }
+Game >> addToDiscardDeck: aCard [
+	deck addToDiscardDeck: aCard.
+]
+
+{ #category : 'as yet unclassified' }
+Game >> applyBattleLossEffectsTo: aSpaceship [
+
+	aSpaceship move: -1 * aSpaceship position + 1.
+	(( OrderedCollection with: aSpaceship ), aSpaceship mercenaries) do: [ :aMercenary |
+		aMercenary updateShield: -1.
+		aMercenary changeShieldStateTo: DoesNotHaveMaxShieldsState create ]
+]
+
+{ #category : 'as yet unclassified' }
 Game >> applyDefendTo: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceships detect: [ :aSpaceship |
 		                     aSpaceship id = anIdOfSpaceship ].
-	affectedSpaceship updateShield: 1.
+	affectedSpaceship applyDefend.
 	lastCardPlayed := Defend.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> applyDoubleTo: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	self targetSpaceshipExistValidation: anIdOfSpaceship.
@@ -85,7 +100,7 @@ Game >> applyDoubleTo: anIdOfSpaceship [
 	lastCardPlayed := Double.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
@@ -100,7 +115,7 @@ Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 	lastCardPlayed := Mercenary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> applyRepeat: idOfTargetSpaceship [ 
 	
 	| affectedSpaceship index |
@@ -117,7 +132,7 @@ Game >> applyRepeat: idOfTargetSpaceship [
 	lastCardPlayed := Repeat.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> applySpeedWith: anIdOfSpaceship [
 
 	| affectedSpaceship |
@@ -128,21 +143,35 @@ Game >> applySpeedWith: anIdOfSpaceship [
 	lastCardPlayed := Speed.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> checkAmountOfCardsOfSpaceships [
 	| spaceshipsSortedById |
 	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
 	^ spaceshipsSortedById collect: [ :spaceship | (spaceship cards) size ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
+Game >> checkMaxShieldsOfSpaceships [
+	| spaceshipsSortedById |
+	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
+	^ spaceshipsSortedById collect: [ :spaceship | spaceship maxShields ]
+]
+
+{ #category : 'as yet unclassified' }
+Game >> checkMultiplierOfSpaceship [
+	| spaceshipsSortedById |
+	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
+	^ spaceshipsSortedById collect: [ :spaceship | spaceship battleMultiplier ]
+]
+
+{ #category : 'as yet unclassified' }
 Game >> checkPositionsOfSpaceships [
 	| spaceshipsSortedById |
 	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
 	^ spaceshipsSortedById collect: [ :spaceship | spaceship position ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> checkRanking [
 	| sortedSpaceships |
 	sortedSpaceships := spaceships copy sort: [ :a :b | a > b ].
@@ -150,14 +179,14 @@ Game >> checkRanking [
 	^ sortedSpaceships collect: [ :spaceship | spaceship id ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> checkShieldsOfSpaceships [
 	| spaceshipsSortedById |
 	spaceshipsSortedById := spaceships copy sort: [ :a :b | (a id) < (b id) ].
 	^ spaceshipsSortedById collect: [ :spaceship | spaceship shield ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> checkWinner [
 
 	^ spaceships
@@ -165,7 +194,7 @@ Game >> checkWinner [
 		  ifNone: [ nil ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> createSpaceships: numberOfSpaceships [
 
 	| aCollectionOfSpaceships anSpaceship |
@@ -178,30 +207,23 @@ Game >> createSpaceships: numberOfSpaceships [
 	^ aCollectionOfSpaceships
 ]
 
-{ #category : #'as yet unclassified' }
-Game >> getBattleMultiplierFor: aSpaceship [ 
-    ^ (OrderedCollection with: aSpaceship battleMultiplier)
-        , ((aSpaceship mercenaries) collect: [:aMercenarySpaceship | aMercenarySpaceship battleMultiplier]).
-
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> getIdOfSpaceshipAtTurn [
 
 	^ spaceships first id
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> getLastCardPlayed [
 	^ lastCardPlayed
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> getPermanentCardPlayed [
 	^ permanentCardsPlayed
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Game >> initializeWith: numberOfSpaceships and: aCollectionOfDices and: aDeck and: aBoard andLapsToWin: amountOfLapsToWin [ 
 	
 	permanentCardsPlayed := OrderedCollection new.
@@ -214,14 +236,14 @@ Game >> initializeWith: numberOfSpaceships and: aCollectionOfDices and: aDeck an
 	spaceships := self createSpaceships: numberOfSpaceships.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> mercenaryAvailabilityValidation: mercenarySpaceship [
 
 	mercenarySpaceship isAvaliableForMercenary ifFalse: [
 		Error signal: 'A spaceship chose a mercenary already chosen' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> passTurn [
 	
 	| actualSpaceship |
@@ -232,7 +254,7 @@ Game >> passTurn [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> playCard: aCardArguments [
 
 	| idOfSpaceship actualSpaceship idOfCard card |
@@ -248,18 +270,22 @@ Game >> playCard: aCardArguments [
 	card := actualSpaceship cards detect: [ :aCard | aCard id = idOfCard ].
 
 	card applyCardEffect: aCardArguments and: self.
+	
 	actualSpaceship removeThis: card.
 	
-	deck addToDiscardDeck: card.
+	card addToDiscard: deck.
+	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> playTurn [
 
 	| actualSpaceship boxToCheck winner |
 	actualSpaceship := spaceships removeFirst.
 
-	actualSpaceship playTurn ifFalse: [ ^ self ].
+	actualSpaceship playTurn ifFalse: [
+		spaceships add: actualSpaceship.
+		^ self ].
 	actualSpaceship move: self throwDices + movementByAcceleration
 		+ actualSpaceship movementBySpeed.
 
@@ -278,13 +304,13 @@ Game >> playTurn [
 	self verifyBattleWith: actualSpaceship
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Game >> removeAcceleration [
 	movementByAcceleration := movementByAcceleration - 1.
 
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Game >> removeMercenary: idOfMercenarySpaceship and: idOfActualSpaceship [ 
 	
 	| mercenarySpaceship actualSpaceship |
@@ -296,13 +322,13 @@ Game >> removeMercenary: idOfMercenarySpaceship and: idOfActualSpaceship [
 
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Game >> removePermanentCardPlayed: aCard [ 
 	permanentCardsPlayed remove: aCard.
 	lastCardPlayed := Cancellation.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> removeSpeedWith: anIdOfSpaceship [ 
 	| affectedSpaceship |
 	affectedSpaceship := spaceships detect: [ :aSpaceship |
@@ -311,7 +337,7 @@ Game >> removeSpeedWith: anIdOfSpaceship [
 	affectedSpaceship removeSpeed. 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> spaceshipExistValidation: idOfSpaceship [
 
 	(self checkRanking includes: idOfSpaceship) ifFalse: [
@@ -319,14 +345,14 @@ Game >> spaceshipExistValidation: idOfSpaceship [
 			'The spaceship that wants to play the card does not exist' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> targetSpaceshipExistValidation: anIdOfSpaceship [
 
 	(self checkRanking includes: anIdOfSpaceship) ifFalse: [
 		Error signal: 'The target spaceship does not exist' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> throwDices [
 
 	| sum |
@@ -335,7 +361,7 @@ Game >> throwDices [
 	^ sum
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> validation: actualSpaceship hasTheCard: idOfCard [
 
 	(actualSpaceship cards noneSatisfy: [ :aCard | aCard id = idOfCard ])
@@ -344,40 +370,30 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 				'A spaceship is trying to play a card that does not have' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Game >> verifyBattleWith: actualSpaceship [
 
-	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship multiplierForActualSpaceship multiplierForCounterSpaceship |
+	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship |
 	actualSpaceship position = 1 ifTrue: [ ^ self ].
-	
-	sumOfThrowsActualSpaceship := 0.
-	sumOfThrowsCounterSpaceship := 0.
-	
+
 	spaceshipsToFight := spaceships select: [ :spaceship |
-                           (spaceship position = actualSpaceship position) and: [ spaceship ~= actualSpaceship ]].
+		                     spaceship position = actualSpaceship position
+			                     and: [ spaceship ~= actualSpaceship ] ].
 
 	spaceshipsToFight := spaceshipsToFight reject: [ :aSpaceship |
 		                     aSpaceship mercenaries includes:
 			                     actualSpaceship ].
-		
-	spaceshipsToFight size = 1 ifFalse: [ ^ self ].
 
+	spaceshipsToFight size = 1 ifFalse: [ ^ self ].
 
 	counterSpaceship := spaceshipsToFight first.
 	
-	multiplierForActualSpaceship :=  self getBattleMultiplierFor: actualSpaceship.
-	multiplierForCounterSpaceship := self getBattleMultiplierFor: counterSpaceship.
+	sumOfThrowsActualSpaceship := actualSpaceship throwDicesForBattleIn: self.
+	sumOfThrowsCounterSpaceship := counterSpaceship throwDicesForBattleIn: self.
 	
-	1 to: (1 + actualSpaceship mercenaries size) do: [ :i | sumOfThrowsActualSpaceship := sumOfThrowsActualSpaceship + (self throwDices * (multiplierForActualSpaceship at: i)) ].
-	1 to: (1 + counterSpaceship mercenaries size) do: [ :i | sumOfThrowsCounterSpaceship := sumOfThrowsCounterSpaceship + (self throwDices * (multiplierForCounterSpaceship at: i))  ].
-
-	 sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
+	sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [
-			actualSpaceship move: -1 * actualSpaceship position + 1.
-			actualSpaceship updateShield: -1.
-			actualSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]]
+			self applyBattleLossEffectsTo: actualSpaceship. ]
 		ifFalse: [
-			counterSpaceship move: -1 * counterSpaceship position + 1.
-			counterSpaceship updateShield: -1.
-			counterSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]].
+			self applyBattleLossEffectsTo: counterSpaceship. ]
 ]

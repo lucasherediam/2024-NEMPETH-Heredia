@@ -1,15 +1,16 @@
 Class {
-	#name : #PathGeneratorTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'PathGeneratorTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 PathGeneratorTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
 
 	| aPathGenerator cards aDeck |
@@ -25,7 +26,7 @@ PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
 	self assert: (((aPathGenerator path) at: 1) isKindOf: NormalBox).
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 
 	| aDeck aPathGenerator pathOfTheBoard percent normalBoxes cardBoxes blackHoleBoxes hyperSpaceJumpBoxes 
@@ -77,7 +78,7 @@ PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 PathGeneratorTest >> test003WhenRatioParsecToBoxesIsEqualOrLessThanZeroThenThorwError [
 	
 	| cards aDeck |

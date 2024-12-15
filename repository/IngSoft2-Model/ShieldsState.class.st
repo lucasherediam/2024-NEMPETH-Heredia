@@ -1,18 +1,16 @@
 Class {
-	#name : 'DeckState',
+	#name : 'ShieldsState',
 	#superclass : 'Object',
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'operations' }
-DeckState class >> create [
-
-	self subclassResponsibility 
+ShieldsState class >> create [
+	self subclassResponsibility.
 ]
 
 { #category : 'as yet unclassified' }
-DeckState >> giveACard: aFiniteDeck [
-
+ShieldsState >> applyDefendTo: aSpaceship [ 
 	self subclassResponsibility.
 ]

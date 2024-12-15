@@ -1,15 +1,16 @@
 Class {
-	#name : #WithCardsState,
-	#superclass : #DeckState,
-	#category : #'IngSoft2-Model'
+	#name : 'WithCardsState',
+	#superclass : 'DeckState',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 WithCardsState class >> create [
 	^ self new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 WithCardsState >> giveACard: aFiniteDeck [
 
 	aFiniteDeck cards isEmpty ifTrue: [

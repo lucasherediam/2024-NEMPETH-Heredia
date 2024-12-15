@@ -1,15 +1,16 @@
 Class {
-	#name : #BoardTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'BoardTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BoardTest >> should: anErrorBlock raise: anErrorClass withMessage: anErrorMessage [ 
 	self should: anErrorBlock raise: anErrorClass withExceptionDo: [ :error | self assert: error messageText equals: anErrorMessage ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test001WhenBoardDoesNotHaveBoxesThenThrowError [
 
 	|aPath|
@@ -24,7 +25,7 @@ BoardTest >> test001WhenBoardDoesNotHaveBoxesThenThrowError [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test002WhenBoardHasThreeBoxesThenLengthIsThree [
 
 	|aBoard aPath aBox aWormhole anotherWormhole |
@@ -41,7 +42,7 @@ BoardTest >> test002WhenBoardHasThreeBoxesThenLengthIsThree [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test004WhenBoardIsCreatedWithTwoBoxesAndWormholeThenLengthIsFour [
 
 	|aBoard aPath aWormhole anotherWormhole aBox anotherBox|
@@ -61,7 +62,7 @@ BoardTest >> test004WhenBoardIsCreatedWithTwoBoxesAndWormholeThenLengthIsFour [
 	self assert: (aPath at: 1) position equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test005ForLoadedBoardWhenASpaceshipPassTheLastBoxThenAddALapCompletedToSpaceship [
 
 	| aSpaceship aBoard aPath aWormhole anotherWormhole aBox anotherBox |
@@ -91,7 +92,7 @@ BoardTest >> test005ForLoadedBoardWhenASpaceshipPassTheLastBoxThenAddALapComplet
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test006ForLoadedBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshipDoesNotThenAddALapToASpaceship [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath aWormhole anotherWormhole aBox anotherBox |
 	aSpaceship := Spaceship createWithId: 1.
@@ -128,7 +129,7 @@ BoardTest >> test006ForLoadedBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshi
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test007ForLoadedBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath aWormhole anotherWormhole aBox anotherBox |
 	aSpaceship := Spaceship createWithId: 1.
@@ -165,7 +166,7 @@ BoardTest >> test007ForLoadedBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test008ForLoaded8WhenASpaceshipMovesBackThroughFirstBoxThenSubtractOneLapCompleted [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath aWormhole anotherWormhole aBox anotherBox |
 	aSpaceship := Spaceship createWithId: 1.
@@ -212,7 +213,7 @@ BoardTest >> test008ForLoaded8WhenASpaceshipMovesBackThroughFirstBoxThenSubtract
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test010TheFirstBoxOfTheBoardIsANormalBox [
 
 	| aBoard aPathGenerator cards aDeck |
@@ -230,7 +231,7 @@ BoardTest >> test010TheFirstBoxOfTheBoardIsANormalBox [
 	self assert: ((aBoard findBoxIn: 1 ) isKindOf: NormalBox)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test013ForBoardWhenASpaceshipPassTheLastBoxThenAddALapCompletedToSpaceship [
 
 		| aSpaceship aBoard aPath|
@@ -248,7 +249,7 @@ BoardTest >> test013ForBoardWhenASpaceshipPassTheLastBoxThenAddALapCompletedToSp
 	self assert: aSpaceship lapsCompleted equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test014ForBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshipDoesNotThenAddALapToASpaceship [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath |
 	
@@ -272,7 +273,7 @@ BoardTest >> test014ForBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshipDoesN
 	self assert: anotherSpaceship lapsCompleted equals: 0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test015ForBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath |
 	
@@ -297,7 +298,7 @@ BoardTest >> test015ForBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 	self assert: anotherSpaceship lapsCompleted equals: 0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoardTest >> test016ForBoardWhenASpaceshipMovesBackThroughFirstBoxThenSubtractOneLapCompleted [
 	| aSpaceship anotherSpaceship spaceships aBoard aPath |
 	

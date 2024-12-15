@@ -1,10 +1,11 @@
 Class {
-	#name : #DeckTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'DeckTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 DeckTest >> test001WhenTheDeckIsAskedForACardThenGivesACard [
 
 	| aDeck cardOne cardTwo |

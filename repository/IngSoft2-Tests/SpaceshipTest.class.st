@@ -1,10 +1,11 @@
 Class {
-	#name : #SpaceshipTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'SpaceshipTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpaceshipTest >> test001WhenASpaceshipIsCreatedThenPositionIsZero [
 	| aSpaceship |
 	aSpaceship := Spaceship createWithId: 1.
@@ -12,7 +13,7 @@ SpaceshipTest >> test001WhenASpaceshipIsCreatedThenPositionIsZero [
 	self assert: aSpaceship position equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpaceshipTest >> test003WhenASpaceshipMovesTwoAndFivePositionsThenPositionIsSeven [
 
 	| aSpaceship |
@@ -22,7 +23,7 @@ SpaceshipTest >> test003WhenASpaceshipMovesTwoAndFivePositionsThenPositionIsSeve
 	self assert: aSpaceship position equals: 8
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpaceshipTest >> test004WhenTheSpaceshipIsCreatedThenCanPlayTurn [
 
 	| aSpaceship |
@@ -32,7 +33,7 @@ SpaceshipTest >> test004WhenTheSpaceshipIsCreatedThenCanPlayTurn [
 	self assert: [ aSpaceship state isKindOf: AvailableState ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpaceshipTest >> test005WhenSpaceshipHasZeroShieldsThenChangeToUnavailableState [
 
 	| aSpaceship |
@@ -44,7 +45,7 @@ SpaceshipTest >> test005WhenSpaceshipHasZeroShieldsThenChangeToUnavailableState 
 	self assert: (aSpaceship state isKindOf: UnavailableState)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpaceshipTest >> test006WhenSpaceshipIsUnavaliablePlayTwoTurnsThenSpaceshipIsAvalibleToPlay [
 
 	| aSpaceship |

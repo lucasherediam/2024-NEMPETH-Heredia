@@ -1,13 +1,14 @@
 Class {
-	#name : #Speed,
-	#superclass : #PermanentCard,
+	#name : 'Speed',
+	#superclass : 'PermanentCard',
 	#instVars : [
 		'idOfAffectedSpaceship'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Speed >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceship idOfSpaceshipAtTurn |
@@ -24,7 +25,7 @@ Speed >> applyCardEffect: aCardArguments and: aGame [
 	
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Speed >> removeCardEffect: aCardArguments and: aGame [ 
 
 	aGame removeSpeedWith: idOfAffectedSpaceship.

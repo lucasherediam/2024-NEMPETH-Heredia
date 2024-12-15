@@ -1,13 +1,14 @@
 Class {
-	#name : #Die,
-	#superclass : #Object,
+	#name : 'Die',
+	#superclass : 'Object',
 	#instVars : [
 		'faces'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Die class >> of: aNumberOfFaces [
 
 	aNumberOfFaces < 3 ifTrue: [
@@ -15,12 +16,12 @@ Die class >> of: aNumberOfFaces [
 	^ self new initializeOf: aNumberOfFaces
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Die >> initializeOf: aNumberOfFaces [
 	faces := aNumberOfFaces.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Die >> throw [
 
 	^ faces atRandom

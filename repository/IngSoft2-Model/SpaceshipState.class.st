@@ -1,16 +1,17 @@
 Class {
-	#name : #SpaceshipState,
-	#superclass : #Object,
-	#category : #'IngSoft2-Model'
+	#name : 'SpaceshipState',
+	#superclass : 'Object',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SpaceshipState class >> create [
 
 	self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SpaceshipState >> playTurn: aSpaceship [
 
 	self subclassResponsibility.

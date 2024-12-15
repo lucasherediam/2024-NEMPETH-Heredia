@@ -1,10 +1,11 @@
 Class {
-	#name : #AtomicBomb,
-	#superclass : #Box,
-	#category : #'IngSoft2-Model'
+	#name : 'AtomicBomb',
+	#superclass : 'Box',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AtomicBomb >> applyEffect: spaceships and: actualSpaceship [
 
 	spaceships do: [ :aSpaceship |

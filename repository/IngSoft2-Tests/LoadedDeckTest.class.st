@@ -1,10 +1,11 @@
 Class {
-	#name : #LoadedDeckTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'LoadedDeckTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 LoadedDeckTest >> test001WhenUsingALoadedDeckThenReturnTheCardsGivenWhenCreated [ 
 	| cards aDeck cardOne cardTwo cardThree |
 	

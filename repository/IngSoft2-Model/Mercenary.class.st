@@ -1,14 +1,15 @@
 Class {
-	#name : #Mercenary,
-	#superclass : #PermanentCard,
+	#name : 'Mercenary',
+	#superclass : 'PermanentCard',
 	#instVars : [
 		'idOfActualSpaceship',
 		'idOfMercenarySpaceship'
 	],
-	#category : #'IngSoft2-Model'
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Mercenary >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceshipAtTurn | 
@@ -26,14 +27,14 @@ Mercenary >> applyCardEffect: aCardArguments and: aGame [
 	aGame addPermanentCardPlayed: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Mercenary >> chooseItselfValidation [
 
 	idOfActualSpaceship = idOfMercenarySpaceship ifTrue: [
 		Error signal: 'A spaceship can not choose itself as mercenary' ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 Mercenary >> removeCardEffect: aCardCollection and: aGame [ 
 
 	aGame removeMercenary: idOfMercenarySpaceship and: idOfActualSpaceship.	

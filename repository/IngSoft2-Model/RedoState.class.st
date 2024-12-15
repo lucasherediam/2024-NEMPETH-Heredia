@@ -1,18 +1,16 @@
 Class {
-	#name : 'DeckState',
+	#name : 'RedoState',
 	#superclass : 'Object',
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'operations' }
-DeckState class >> create [
-
-	self subclassResponsibility 
+RedoState class >> create [
+	^ self new.
 ]
 
 { #category : 'as yet unclassified' }
-DeckState >> giveACard: aFiniteDeck [
-
-	self subclassResponsibility.
+RedoState >> discard: aCard in: aGame [
+	self subclassResponsibility
 ]

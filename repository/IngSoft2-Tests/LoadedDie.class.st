@@ -1,29 +1,30 @@
 Class {
-	#name : #LoadedDie,
-	#superclass : #Object,
+	#name : 'LoadedDie',
+	#superclass : 'Object',
 	#instVars : [
 		'faces',
 		'sequence',
 		'index'
 	],
-	#category : #'IngSoft2-Tests'
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LoadedDie class >> numberOfFacesValidation: aNumberOfFaces [
 
 	aNumberOfFaces < 3 ifTrue: [
 		Error signal: 'Faces should be more than 2' ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LoadedDie class >> of: aNumberOfFaces [
 
 	self numberOfFacesValidation: aNumberOfFaces.
 	^ self new initializeOf: aNumberOfFaces
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LoadedDie >> add: aSequence [
 
 	self sequenceValidation: aSequence.
@@ -32,12 +33,12 @@ LoadedDie >> add: aSequence [
 	index := 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LoadedDie >> initializeOf: aNumberOfFaces [
 	faces := aNumberOfFaces.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LoadedDie >> sequenceValidation: aSequence [
 
 	(aSequence anySatisfy: [ :each | each > faces ]) ifTrue: [
@@ -45,7 +46,7 @@ LoadedDie >> sequenceValidation: aSequence [
 			'Numbers in the sequence should be smaller than number of faces' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LoadedDie >> throw [
 
 	| number |

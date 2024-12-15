@@ -1,10 +1,11 @@
 Class {
-	#name : #Defend,
-	#superclass : #InstantCard,
-	#category : #'IngSoft2-Model'
+	#name : 'Defend',
+	#superclass : 'InstantCard',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Defend >> applyCardEffect: aCardArguments and: aGame [ 
 	
 	| idOfTargetSpaceship |

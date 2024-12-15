@@ -1,10 +1,11 @@
 Class {
-	#name : #NormalBox,
-	#superclass : #Box,
-	#category : #'IngSoft2-Model'
+	#name : 'NormalBox',
+	#superclass : 'Box',
+	#category : 'IngSoft2-Model',
+	#package : 'IngSoft2-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NormalBox >> applyEffect: spaceships and: actualSpaceship [
 
 	^ self
